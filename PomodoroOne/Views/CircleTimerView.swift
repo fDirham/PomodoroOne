@@ -20,11 +20,13 @@ struct CircleTimerView: View {
             .overlay{
                 CircleTimerArc(pctDone: pctDone, diameter: size - lineWidth)
                     .stroke(.ourOrange, lineWidth: lineWidth)
+                    .rotationEffect(Angle(degrees: -90))
             }
             .overlay{
                 CircleTimerKnob(
                 diameter: size, knobDiameter: knobSize, pctDone: pctDone
                 )
+                .rotationEffect(Angle(degrees: -90))
             }
     }
 }
