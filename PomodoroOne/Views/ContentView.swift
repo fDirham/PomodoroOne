@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    @State private var isPaused: Bool = true
     @State private var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     @ObservedObject var modelData: ModelData
@@ -26,12 +25,12 @@ struct ContentView: View {
                                 updateTimer()
                             }
                         Button(action: {
-                            isPaused ?
+                            modelData.isPaused ?
                             resumePomodoro()
                             :
                             pausePomodoro()
                         }){
-                            Image(systemName: isPaused ?  "play.fill" :"pause.fill")
+                            Image(systemName: modelData.isPaused ?  "play.fill" :"pause.fill")
                                 .resizable()
                                 .frame(width: 18, height: 18)
                         }
@@ -61,8 +60,8 @@ struct ContentView: View {
     }
     
     private func updateTimer() {
-        if isPaused {
-            stopTimer()
+        if modelData.isPaused {
+            self.timer.upstream.connect().cancel()
         }
         else{
             modelData.timerLeftS -= 1
@@ -70,20 +69,12 @@ struct ContentView: View {
     }
     
     private func pausePomodoro(){
-        isPaused = true
-        stopTimer()
-    }
-    
-    private func resumePomodoro(){
-        isPaused = false
-        startTimer()
-    }
-    
-    private func stopTimer() {
+        modelData.isPaused = true
         self.timer.upstream.connect().cancel()
     }
     
-    private func startTimer() {
+    private func resumePomodoro(){
+        modelData.isPaused = false
         self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
 }

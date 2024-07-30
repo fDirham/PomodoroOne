@@ -10,7 +10,8 @@ import Foundation
 class ModelData: ObservableObject {
     @Published var timerStartS: Int = 100
     @Published var timerLeftS: Int = 100
-    
+    @Published var isPaused: Bool = true
+
     var timerStringVal: String {
         let minutes = timerLeftS / 60 % 60
         let seconds = timerLeftS % 60
