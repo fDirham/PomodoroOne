@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MenuBarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Text("20:24")
+            Image("menu-bar-icon__on")
+        }
     }
 }
 
