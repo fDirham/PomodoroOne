@@ -8,8 +8,8 @@
 import Foundation
 
 class ModelData: ObservableObject {
-    @Published var timerStartS: Int = 100
-    @Published var timerLeftS: Int = 100
+    @Published var timerStartS: Int = 20
+    @Published var timerLeftS: Int = 20
     @Published var isPaused: Bool = true
 
     var timerStringVal: String {

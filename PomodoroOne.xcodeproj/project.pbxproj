@@ -17,6 +17,7 @@
 		8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */; };
 		8B69F8DB2C596797004F61B8 /* CircleTimerKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */; };
 		8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DD2C5999F3004F61B8 /* ModelData.swift */; };
+		8B69F8E02C59A776004F61B8 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8DF2C59A776004F61B8 /* ding.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerArc.swift; sourceTree = "<group>"; };
 		8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerKnob.swift; sourceTree = "<group>"; };
 		8B69F8DD2C5999F3004F61B8 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		8B69F8DF2C59A776004F61B8 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				8B69F8CF2C585E3E004F61B8 /* StatusBarController.swift */,
 				8B69F8DC2C5999D9004F61B8 /* Models */,
 				8B69F8D52C5964DD004F61B8 /* Views */,
+				8B69F8E12C59A77C004F61B8 /* Resources */,
 				8B69F8A92C581660004F61B8 /* Assets.xcassets */,
 				8B69F8AE2C581660004F61B8 /* PomodoroOne.entitlements */,
 				8B69F8AB2C581660004F61B8 /* Preview Content */,
@@ -101,6 +104,14 @@
 				8B69F8DD2C5999F3004F61B8 /* ModelData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8B69F8E12C59A77C004F61B8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B69F8DF2C59A776004F61B8 /* ding.wav */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B69F8E02C59A776004F61B8 /* ding.wav in Resources */,
 				8B69F8AD2C581660004F61B8 /* Preview Assets.xcassets in Resources */,
 				8B69F8AA2C581660004F61B8 /* Assets.xcassets in Resources */,
 			);
