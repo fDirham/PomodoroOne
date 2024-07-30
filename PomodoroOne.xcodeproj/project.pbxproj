@@ -16,6 +16,7 @@
 		8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D32C596394004F61B8 /* CircleTimerView.swift */; };
 		8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */; };
 		8B69F8DB2C596797004F61B8 /* CircleTimerKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */; };
+		8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DD2C5999F3004F61B8 /* ModelData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8B69F8D32C596394004F61B8 /* CircleTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerView.swift; sourceTree = "<group>"; };
 		8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerArc.swift; sourceTree = "<group>"; };
 		8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerKnob.swift; sourceTree = "<group>"; };
+		8B69F8DD2C5999F3004F61B8 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */,
 				8B69F8CF2C585E3E004F61B8 /* StatusBarController.swift */,
+				8B69F8DC2C5999D9004F61B8 /* Models */,
 				8B69F8D52C5964DD004F61B8 /* Views */,
 				8B69F8A92C581660004F61B8 /* Assets.xcassets */,
 				8B69F8AE2C581660004F61B8 /* PomodoroOne.entitlements */,
@@ -90,6 +93,14 @@
 				8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8B69F8DC2C5999D9004F61B8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B69F8DD2C5999F3004F61B8 /* ModelData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 				8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */,
 				8B69F8D02C585E3E004F61B8 /* StatusBarController.swift in Sources */,
 				8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */,
+				8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */,
 				8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */,
 				8B69F8DB2C596797004F61B8 /* CircleTimerKnob.swift in Sources */,
 			);

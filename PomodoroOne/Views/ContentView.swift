@@ -10,33 +10,17 @@ import Combine
 
 struct ContentView: View {
     @State private var isPaused: Bool = true
-    @State private var timer: Publishers.Autoconnect<Timer.TimerPublisher>
-    @State private var timerStartS: Int = 100
-    @State private var timerCountS: Int = 100
-    
-    private var timerValString: String{
-        let minutes = timerCountS / 60 % 60
-        let seconds = timerCountS % 60
-        return "\(minutes):\(seconds)"
-    }
-    
-    private var timerPctDone: Double {
-        let timeElapsed = timerStartS - timerCountS
-        return  Double(timeElapsed) * 100 / Double(timerStartS)
-    }
+    @State private var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    init(){
-        let newTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-        self.timer = newTimer
-    }
+    @ObservedObject var modelData: ModelData
     
     var body: some View {
         VStack {
             Spacer()
-            CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: timerPctDone)
+            CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: modelData.timerPctDone)
                 .overlay{
                     VStack(spacing:5) {
-                        Text(timerValString)
+                        Text(modelData.timerStringVal)
                             .font(.system(size: 32))
                             .onReceive(timer) {_ in
                                 updateTimer()
@@ -73,7 +57,7 @@ struct ContentView: View {
             }
         }
         .padding()
-        .frame(width: 176, height: 180)
+        .frame(width: 176, height: 220)
     }
     
     private func updateTimer() {
@@ -81,7 +65,7 @@ struct ContentView: View {
             stopTimer()
         }
         else{
-            timerCountS -= 1
+            modelData.timerLeftS -= 1
         }
     }
     
@@ -104,6 +88,15 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Preview: PreviewProvider {
+    struct Container: View {
+        @StateObject var modelData = ModelData()
+        var body: some View {
+            ContentView(modelData: modelData)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
 }

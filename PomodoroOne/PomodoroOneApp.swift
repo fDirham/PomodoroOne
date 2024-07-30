@@ -11,16 +11,14 @@ import Cocoa
 @main
 struct PomodoroOneApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         Settings {
-            
             EmptyView()
         }
     }
     
 }
-
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBar: StatusBarController?

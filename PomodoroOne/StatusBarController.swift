@@ -9,31 +9,32 @@ import AppKit
 import SwiftUI
 
 class StatusBarController {
-    private var statusItem: NSStatusItem
-    private var mainView: NSView
-
-    init(_ view: NSView) {
-        let contentView = ContentView()
+    private var statusItem: NSStatusItem // Need to keep this otherwise menu item just disappears
+    private var modelData = ModelData()
+    
+    init() {
+        let contentView = ContentView(modelData: modelData)
         let mainView = NSHostingView(rootView: contentView)
-        mainView.frame =  NSRect(x: 0, y: 0, width: 200, height: 200)
+        mainView.frame =  NSRect(x: 0, y: 0, width: 176, height: 220)
         
-        self.mainView = mainView
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        let iconSwiftUI = MenuBarView(modelData: modelData)
+        let iconView = NSHostingView(rootView: iconSwiftUI)
+        iconView.frame = NSRect(x: 0, y: 0, width: 80, height: 22)
+
+        self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let statusBarButton = statusItem.button {
-            let iconSwiftUI = MenuBarView()
-            let iconView = NSHostingView(rootView: iconSwiftUI)
-            iconView.frame = NSRect(x: 0, y: 0, width: 120, height: 22)
-            
             let menuItem = NSMenuItem()
             menuItem.view = mainView
             
             let menu = NSMenu()
             menu.addItem(menuItem)
 
+            // Menu buttons
             statusBarButton.addSubview(iconView)
             statusBarButton.frame = iconView.frame
             
+            // What gets shown when clicked
             statusItem.menu = menu
         }
     }

@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct MenuBarView: View {
+    @ObservedObject var modelData: ModelData
+    
     var body: some View {
         HStack{
-            Text("20:24")
+            Text(modelData.timerStringVal)
                 .font(.system(size: 14))
             Image("menu-bar-icon__on")
                 .resizable()
@@ -19,6 +21,15 @@ struct MenuBarView: View {
     }
 }
 
-#Preview {
-    MenuBarView()
+struct MenuBarView_Preview: PreviewProvider {
+    struct Container: View {
+        @StateObject var modelData = ModelData()
+        var body: some View {
+            MenuBarView(modelData: modelData)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
 }
