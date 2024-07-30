@@ -9,20 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isPaused: Bool = false
+    @State private var timerPctDone: Double = 30
     
     var body: some View {
         VStack {
             Spacer()
-            VStack(spacing:5) {
-                Text("12:34")
-                    .font(.system(size: 32))
-                Button(action: {isPaused.toggle()}){
-                    Image(systemName: isPaused ?  "play.fill" :"pause.fill")
-                        .resizable()
-                        .frame(width: 18, height: 18)
+            CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: timerPctDone)
+                .overlay{
+                    VStack(spacing:5) {
+                        Text("12:34")
+                            .font(.system(size: 32))
+                        Button(action: {isPaused.toggle()}){
+                            Image(systemName: isPaused ?  "play.fill" :"pause.fill")
+                                .resizable()
+                                .frame(width: 18, height: 18)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
-                .buttonStyle(PlainButtonStyle())
-            }
             Spacer()
             HStack{
                 Spacer()
@@ -42,7 +46,7 @@ struct ContentView: View {
             }
         }
         .padding()
-        .frame(width: 168, height: 143)
+        .frame(width: 176, height: 180)
     }
 }
 
