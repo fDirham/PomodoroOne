@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B00808D2C5AE9DB00469A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */; };
 		8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */; };
 		8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8A72C58165D004F61B8 /* ContentView.swift */; };
 		8B69F8AA2C581660004F61B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8A92C581660004F61B8 /* Assets.xcassets */; };
 		8B69F8AD2C581660004F61B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8AC2C581660004F61B8 /* Preview Assets.xcassets */; };
-		8B69F8D02C585E3E004F61B8 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8CF2C585E3E004F61B8 /* StatusBarController.swift */; };
 		8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D12C586020004F61B8 /* MenuBarView.swift */; };
 		8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D32C596394004F61B8 /* CircleTimerView.swift */; };
 		8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */; };
@@ -21,13 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B69F8A22C58165D004F61B8 /* PomodoroOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroOneApp.swift; sourceTree = "<group>"; };
 		8B69F8A72C58165D004F61B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B69F8A92C581660004F61B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B69F8AC2C581660004F61B8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B69F8AE2C581660004F61B8 /* PomodoroOne.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomodoroOne.entitlements; sourceTree = "<group>"; };
-		8B69F8CF2C585E3E004F61B8 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		8B69F8D12C586020004F61B8 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		8B69F8D32C596394004F61B8 /* CircleTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerView.swift; sourceTree = "<group>"; };
 		8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerArc.swift; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */,
-				8B69F8CF2C585E3E004F61B8 /* StatusBarController.swift */,
+				8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */,
 				8B69F8DC2C5999D9004F61B8 /* Models */,
 				8B69F8D52C5964DD004F61B8 /* Views */,
 				8B69F8E12C59A77C004F61B8 /* Resources */,
@@ -188,7 +188,7 @@
 				8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */,
 				8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */,
 				8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */,
-				8B69F8D02C585E3E004F61B8 /* StatusBarController.swift in Sources */,
+				8B00808D2C5AE9DB00469A8A /* AppDelegate.swift in Sources */,
 				8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */,
 				8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */,
 				8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */,

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Cocoa
 
 @main
 struct PomodoroOneApp: App {
@@ -30,14 +29,4 @@ struct PomodoroOneApp: App {
 //    }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    var statusBar: StatusBarController?
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        statusBar = StatusBarController()
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-}
