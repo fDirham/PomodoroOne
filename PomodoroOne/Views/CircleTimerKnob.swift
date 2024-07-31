@@ -11,6 +11,7 @@ struct CircleTimerKnob: View {
     let diameter: Double
     let knobDiameter: Double
     let pctDone: Double
+    var knobColor: Color
     
     private var bigCircleDiameter: Double {
         diameter + (knobDiameter / 2.0)
@@ -25,7 +26,7 @@ struct CircleTimerKnob: View {
                 Spacer()
                 Circle()
                     .frame(width: knobDiameter, height: knobDiameter)
-                    .foregroundStyle(.ourOrange)
+                    .foregroundStyle(knobColor)
             }
             .frame(width: bigCircleDiameter, height: bigCircleDiameter)
             .rotationEffect(rotationAngle)
@@ -33,5 +34,5 @@ struct CircleTimerKnob: View {
 }
 
 #Preview {
-    CircleTimerKnob(diameter: 100, knobDiameter: 20, pctDone: 12.5)
+    CircleTimerKnob(diameter: 100, knobDiameter: 20, pctDone: 12.5, knobColor: .work)
 }

@@ -18,6 +18,16 @@ struct PomodoroOneApp: App {
         }
     }
     
+    // Uncomment for menu bar extra
+//    @StateObject private var modelData = ModelData()
+//    var body: some Scene {
+//        MenuBarExtra{
+//            ContentView(modelData: modelData)
+//        } label: {
+//            MenuBarView(modelData: modelData)
+//        }
+//        .menuBarExtraStyle(.window)
+//    }
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate {

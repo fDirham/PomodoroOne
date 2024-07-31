@@ -11,14 +11,31 @@ import AVFoundation
 struct MenuBarView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var soundPlayer: AVAudioPlayer?
-
     @ObservedObject var modelData: ModelData
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var menuBarFileName: String {
+        if modelData.isPaused{
+            if colorScheme == .dark {
+                return "menu-bar-icon__white"
+            }
+            return "menu-bar-icon__black"
+        }
+        if modelData.currentSessionType == ModelData.SessionType.work {
+            return "menu-bar-icon__on"
+        }
+        else {
+            return "menu-bar-icon__rest"
+        }
+    }
     
     var body: some View {
         HStack{
             Text(modelData.timerStringVal)
                 .font(.system(size: 14))
-            Image("menu-bar-icon__on")
+                .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
+            Image(menuBarFileName)
                 .resizable()
                 .frame(width: 17, height: 17)
         }
@@ -36,7 +53,7 @@ struct MenuBarView: View {
             case "startTimer":
                 startTimer()
             default:
-                print("Have you done something new?")
+                print("ERROR: Unsupported action for menu")
             }
             modelData.menuViewAction = nil
         }

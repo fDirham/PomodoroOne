@@ -12,6 +12,7 @@ struct CircleTimerView: View {
     var lineWidth: Double
     var knobSize: Double
     var pctDone: Double
+    var activeColor: Color
     
     var realPctDone: Double {
         if pctDone < 100.0 {
@@ -26,12 +27,12 @@ struct CircleTimerView: View {
             .frame(width: size, height: size)
             .overlay{
                 CircleTimerArc(pctDone: realPctDone, diameter: size - lineWidth)
-                    .stroke(.ourOrange, lineWidth: lineWidth)
+                    .stroke(activeColor, lineWidth: lineWidth)
                     .rotationEffect(Angle(degrees: -90))
             }
             .overlay{
                 CircleTimerKnob(
-                diameter: size, knobDiameter: knobSize, pctDone: realPctDone
+                diameter: size, knobDiameter: knobSize, pctDone: realPctDone, knobColor: activeColor
                 )
                 .rotationEffect(Angle(degrees: -90))
             }
@@ -39,5 +40,5 @@ struct CircleTimerView: View {
 }
 
 #Preview {
-    CircleTimerView(size: 122.0, lineWidth: 6, knobSize: 15, pctDone: 50)
+    CircleTimerView(size: 122.0, lineWidth: 6, knobSize: 15, pctDone: 50, activeColor: .work)
 }

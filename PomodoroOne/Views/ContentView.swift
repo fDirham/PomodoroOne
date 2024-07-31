@@ -14,16 +14,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: modelData.timerPctDone)
+            CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: modelData.timerPctDone, activeColor: modelData.activeColor)
                 .overlay{
                     VStack(spacing:5) {
                         Text(modelData.timerStringVal)
                             .font(.system(size: 32))
                         Button(action: {
-                            modelData.isPaused ?
-                            modelData.playTimer()
-                            :
-                            modelData.pauseTimer()
+                            modelData.handleActionButtonPress()
                         }){
                             Image(systemName: modelData.isPaused ?  "play.fill" :"pause.fill")
                                 .resizable()
@@ -41,9 +38,11 @@ struct ContentView: View {
                     })
                     Button("Quit", action: {exit(0)})
                 } label: {
-                    Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .frame(width: 15, height: 15)
+                    Button(action: {print("bro")}) {
+                        Image(systemName: "gearshape.fill")
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                    }
                 }
                 .menuStyle(BorderlessButtonMenuStyle())
                 .menuIndicator(.hidden)
