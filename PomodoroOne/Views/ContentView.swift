@@ -9,9 +9,6 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State private var soundPlayer: AVAudioPlayer?
-
     @ObservedObject var modelData: ModelData
     
     var body: some View {
@@ -22,14 +19,11 @@ struct ContentView: View {
                     VStack(spacing:5) {
                         Text(modelData.timerStringVal)
                             .font(.system(size: 32))
-                            .onReceive(timer) {_ in
-                                updateTimer()
-                            }
                         Button(action: {
                             modelData.isPaused ?
-                            resumePomodoro()
+                            modelData.playTimer()
                             :
-                            pausePomodoro()
+                            modelData.pauseTimer()
                         }){
                             Image(systemName: modelData.isPaused ?  "play.fill" :"pause.fill")
                                 .resizable()
@@ -58,48 +52,6 @@ struct ContentView: View {
         }
         .padding()
         .frame(width: 176, height: 220)
-    }
-    
-    private func updateTimer() {
-        if modelData.isPaused {
-            self.timer.upstream.connect().cancel()
-        }
-        else {
-            modelData.timerLeftS -= 1
-        }
-        
-        if modelData.timerLeftS <= 0{
-            handleTimerDone()
-        }
-    }
-    
-    private func pausePomodoro(){
-        modelData.isPaused = true
-        self.timer.upstream.connect().cancel()
-    }
-    
-    private func resumePomodoro(){
-        modelData.isPaused = false
-        self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    }
-    
-    private func handleTimerDone(){
-        self.pausePomodoro()
-        modelData.timerLeftS = modelData.timerStartS
-        playSound()
-    }
-    
-    private func playSound() {
-        guard let soundURL = Bundle.main.url(forResource: "ding", withExtension: "wav") else {
-            return
-        }
-        
-        do {
-            soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-        } catch {
-            print("Failed to load the sound: \(error)")
-        }
-        soundPlayer?.play()
     }
 }
 
