@@ -52,6 +52,10 @@ struct MenuBarView: View {
                 stopTimer()
             case "startTimer":
                 startTimer()
+            case "soundRestEnd":
+                playSound()
+            case "soundWorkEnd":
+                playSound()
             default:
                 print("ERROR: Unsupported action for menu")
             }

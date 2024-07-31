@@ -27,6 +27,7 @@ class ModelData: ObservableObject {
     @Published var longRestSessionDurationS = 4
     @Published var isAutoPlay: Bool = false
     @Published var isOvertime: Bool = false
+    @Published var isOvertimeAllowed: Bool = false
 
     // Keeping track of current day
     @Published var lastOpenedAt: Date = Date.now
@@ -104,12 +105,12 @@ class ModelData: ObservableObject {
     
     func pauseTimer(){
         self.isPaused = true
-        self.menuViewAction = "stopTimer"
+        invokeMenuViewAction(actionVal: "stopTimer")
     }
     
     func playTimer(){
         self.isPaused = false
-        self.menuViewAction = "startTimer"
+        invokeMenuViewAction(actionVal: "startTimer")
     }
     
     func handleResetSession(){
@@ -122,12 +123,25 @@ class ModelData: ObservableObject {
     }
     
     private func handleTimerOnZero(){
+        if currentSessionType == SessionType.work {
+            invokeMenuViewAction(actionVal: "soundWorkEnd")
+        }
+        else {
+            invokeMenuViewAction(actionVal: "soundRestEnd")
+        }
+        
         if isAutoPlay {
             completeSession()
         }
         else{
-            self.isOvertime = true
+            if isOvertimeAllowed {
+                self.isOvertime = true
+            }
+            else {
+                completeSession()
+            }
         }
+        
     }
     
     private func completeSession(){
@@ -164,6 +178,7 @@ class ModelData: ObservableObject {
         }
     }
     
+    // Session types
     enum SessionType {
         case work
         case rest
@@ -181,5 +196,14 @@ class ModelData: ObservableObject {
         }
         
         return SessionType.rest
+    }
+    
+    // View action invokes
+    private func invokeContentViewAction(actionVal: String) {
+        self.contentViewAction = actionVal
+    }
+    
+    private func invokeMenuViewAction(actionVal: String) {
+        self.menuViewAction = actionVal
     }
 }
