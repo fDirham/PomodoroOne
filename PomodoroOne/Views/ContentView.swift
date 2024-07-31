@@ -10,9 +10,40 @@ import AVFoundation
 
 struct ContentView: View {
     @ObservedObject var modelData: ModelData
+    @State private var confirmSkip: Bool = false
+    @State private var confirmReset: Bool = false
+
+    var topTextVal: String {
+        if modelData.currentSessionType == ModelData.SessionType.work {
+            return "work"
+        }
+        return "rest"
+    }
     
     var body: some View {
         VStack {
+            HStack{
+                Spacer()
+                Spacer()
+                Text(topTextVal)
+                    .fontWeight(.semibold)
+                Spacer()
+                Menu {
+                    Button("Next", action: {
+                        confirmSkip = true
+                    })
+                    Button("Redo", role: .destructive, action: {
+                        confirmReset = true
+                    })
+                } label: {
+                    Image(systemName: "forward.fill")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                }
+                .menuStyle(BorderlessButtonMenuStyle())
+                .menuIndicator(.hidden)
+                .fixedSize()
+            }
             Spacer()
             CircleTimerView(size: 130, lineWidth: 8, knobSize: 16, pctDone: modelData.timerPctDone, activeColor: modelData.activeColor)
                 .overlay{
@@ -32,17 +63,18 @@ struct ContentView: View {
             Spacer()
             HStack{
                 Spacer()
+                Spacer()
+                Text("Today \(modelData.workCounter)/10")
+                Spacer()
                 Menu {
                     Button("Settings", action: {
                         print("TODO")
                     })
                     Button("Quit", action: {exit(0)})
                 } label: {
-                    Button(action: {print("bro")}) {
-                        Image(systemName: "gearshape.fill")
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                    }
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .frame(width: 15, height: 15)
                 }
                 .menuStyle(BorderlessButtonMenuStyle())
                 .menuIndicator(.hidden)
@@ -51,6 +83,22 @@ struct ContentView: View {
         }
         .padding()
         .frame(width: 176, height: 220)
+        .confirmationDialog("Skip session", isPresented: $confirmSkip) {
+            Button("Skip", role: .destructive) {
+                modelData.handleSkipSession()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure you want to skip the current session?")
+        }
+        .confirmationDialog("Redo session", isPresented: $confirmReset) {
+            Button("Redo", role: .destructive) {
+                modelData.handleResetSession()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure you want to redo the current session?")
+        }
     }
 }
 

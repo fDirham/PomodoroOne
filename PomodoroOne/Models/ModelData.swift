@@ -112,6 +112,15 @@ class ModelData: ObservableObject {
         self.menuViewAction = "startTimer"
     }
     
+    func handleResetSession(){
+        self.isPaused = true
+        self.timerLeftS = self.timerStartS
+    }
+    
+    func handleSkipSession(){
+        self.completeSession()
+    }
+    
     private func handleTimerOnZero(){
         if isAutoPlay {
             completeSession()
