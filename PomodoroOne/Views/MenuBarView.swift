@@ -32,9 +32,11 @@ struct MenuBarView: View {
     
     var body: some View {
         HStack{
-            Text(modelData.timerStringVal)
-                .font(.system(size: 14))
-                .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
+            if !modelData.isPaused {
+                Text(modelData.timerStringVal)
+                    .font(.system(size: 14))
+                    .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
+            }
             Image(menuBarFileName)
                 .resizable()
                 .frame(width: 17, height: 17)
@@ -43,8 +45,20 @@ struct MenuBarView: View {
             modelData.handleTimerTick()
         }
         .onChange(of: modelData.menuViewAction, initial: false, handleModelDataAction)
+        .task {
+            do {
+                try await modelData.loadUserConfig()
+            } catch {
+                do{
+                    try await modelData.saveUserConfig()
+                }
+                catch {
+                    // TODO
+                }
+            }
+        }
     }
-    
+
     private func handleModelDataAction(){
         if let actionVal = modelData.menuViewAction {
             switch actionVal {

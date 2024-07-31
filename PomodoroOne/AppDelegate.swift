@@ -9,13 +9,16 @@ import Foundation
 import Cocoa
 import SwiftUI
 
+
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private var modelData = ModelData()
+    private var modelData: ModelData!
     private var popover: NSPopover!
     private var statusBarItem: NSStatusItem! // Need to keep this otherwise menu item just disappears
     let invisibleWindow = NSWindow(contentRect: NSMakeRect(0, 0, 20, 5), styleMask: .borderless, backing: .buffered, defer: false)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.modelData = ModelData()
+        
         statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
         invisibleWindow.backgroundColor = .red
         invisibleWindow.alphaValue = 0
@@ -57,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 extension AppDelegate {
-    
+
     @objc func openAbout() {
         print("Open about")
     }

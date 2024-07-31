@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class ModelData: ObservableObject {
     @Published var timerStartS: Int = 3
     @Published var timerLeftS: Int = 3
@@ -39,7 +40,6 @@ class ModelData: ObservableObject {
 
     
     // Computed values
-
     var timerStringVal: String {
         let minutes = abs(timerLeftS) / 60 % 60
         let seconds = abs(timerLeftS) % 60
@@ -76,6 +76,7 @@ class ModelData: ObservableObject {
         return .rest
     }
     
+    // Timer updates
     func handleTimerTick(){
         if isPaused {
             self.pauseTimer()
@@ -87,39 +88,6 @@ class ModelData: ObservableObject {
         if timerLeftS <= 0{
             self.handleTimerOnZero()
         }
-    }
-    
-    func handleActionButtonPress(){
-        if self.isOvertime {
-            completeSession()
-        }
-        else {
-            if self.isPaused {
-                self.playTimer()
-            }
-            else{
-                self.pauseTimer()
-            }
-        }
-    }
-    
-    func pauseTimer(){
-        self.isPaused = true
-        invokeMenuViewAction(actionVal: "stopTimer")
-    }
-    
-    func playTimer(){
-        self.isPaused = false
-        invokeMenuViewAction(actionVal: "startTimer")
-    }
-    
-    func handleResetSession(){
-        self.isPaused = true
-        self.timerLeftS = self.timerStartS
-    }
-    
-    func handleSkipSession(){
-        self.completeSession()
     }
     
     private func handleTimerOnZero(){
@@ -177,6 +145,40 @@ class ModelData: ObservableObject {
             self.timerStartS = self.longRestSessionDurationS
         }
     }
+
+    // User controls
+    func handleActionButtonPress(){
+        if self.isOvertime {
+            completeSession()
+        }
+        else {
+            if self.isPaused {
+                self.playTimer()
+            }
+            else{
+                self.pauseTimer()
+            }
+        }
+    }
+    
+    func pauseTimer(){
+        self.isPaused = true
+        invokeMenuViewAction(actionVal: "stopTimer")
+    }
+    
+    func playTimer(){
+        self.isPaused = false
+        invokeMenuViewAction(actionVal: "startTimer")
+    }
+    
+    func handleResetSession(){
+        self.isPaused = true
+        self.timerLeftS = self.timerStartS
+    }
+    
+    func handleSkipSession(){
+        self.completeSession()
+    }
     
     // Session types
     enum SessionType {
@@ -205,5 +207,77 @@ class ModelData: ObservableObject {
     
     private func invokeMenuViewAction(actionVal: String) {
         self.menuViewAction = actionVal
+    }
+    
+    // Load and save user configs
+    private static func userConfigFileURL() throws -> URL {
+        let toReturn = try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent("config.data")
+        return toReturn
+    }
+    
+    enum UserConfigLoadError: Error {
+        case failedLoad
+        case failedSave
+    }
+    
+    func loadUserConfig() async throws {
+        if GenHelpers.isPreview {
+            return
+        }
+        
+        let task = Task<UserConfig, Error> {
+            let fileURL = try Self.userConfigFileURL()
+            guard let data = try? Data(contentsOf: fileURL) else {
+                throw UserConfigLoadError.failedLoad
+            }
+            let decoded = try JSONDecoder().decode(UserConfig.self, from: data)
+            return decoded
+        }
+        let userConfig = try await task.value
+        self.applyUserConfig(userConfig: userConfig)
+    }
+    
+    func saveUserConfig() async throws {
+        if GenHelpers.isPreview {
+            return
+        }
+        
+        let toSave = convertToUserConfig()
+        let task = Task {
+            let data = try JSONEncoder().encode(toSave)
+            let outfile = try Self.userConfigFileURL()
+            try data.write(to: outfile)
+        }
+        _ = try await task.value
+    }
+    
+    private func applyUserConfig(userConfig: UserConfig){
+        self.workSessionDurationS = userConfig.workDurationS
+        self.restSessionDurationS = userConfig.restDurationS
+        self.longRestSessionDurationS = userConfig.longRestDurationS
+        self.whenToLongRest = userConfig.whenToLongRest
+        self.targetWorkSessions = userConfig.targetWorkSessions
+        self.isAutoPlay = userConfig.autoPlay
+        self.isOvertimeAllowed = userConfig.overtimeAllowed
+        
+        // Might be hacky lmao
+        self.timerStartS = userConfig.workDurationS
+        self.timerLeftS = userConfig.workDurationS
+    }
+    
+    private func convertToUserConfig() -> UserConfig{
+        return UserConfig(
+            workDurationS: self.workSessionDurationS,
+            restDurationS: self.restSessionDurationS,
+            longRestDurationS: self.longRestSessionDurationS,
+            whenToLongRest: self.whenToLongRest,
+            targetWorkSessions: self.targetWorkSessions,
+            autoPlay: self.isAutoPlay,
+            overtimeAllowed: self.isOvertimeAllowed
+        )
     }
 }

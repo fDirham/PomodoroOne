@@ -64,7 +64,7 @@ struct ContentView: View {
             HStack{
                 Spacer()
                 Spacer()
-                Text("Today \(modelData.workCounter)/10")
+                Text("Today \(modelData.workCounter)/\(modelData.targetWorkSessions)")
                 Spacer()
                 Menu {
                     Button("Settings", action: {

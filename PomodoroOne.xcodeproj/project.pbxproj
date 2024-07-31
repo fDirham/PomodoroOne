@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8B00808D2C5AE9DB00469A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */; };
+		8B00808F2C5AF45C00469A8A /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00808E2C5AF45C00469A8A /* UserConfig.swift */; };
+		8B0080922C5AFEDF00469A8A /* GenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0080912C5AFEDF00469A8A /* GenHelpers.swift */; };
 		8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */; };
 		8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8A72C58165D004F61B8 /* ContentView.swift */; };
 		8B69F8AA2C581660004F61B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8A92C581660004F61B8 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B00808E2C5AF45C00469A8A /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
+		8B0080912C5AFEDF00469A8A /* GenHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenHelpers.swift; sourceTree = "<group>"; };
 		8B69F8A22C58165D004F61B8 /* PomodoroOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroOneApp.swift; sourceTree = "<group>"; };
 		8B69F8A72C58165D004F61B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B0080902C5AFED500469A8A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8B0080912C5AFEDF00469A8A /* GenHelpers.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		8B69F8992C58165D004F61B8 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +80,7 @@
 			children = (
 				8B69F8A52C58165D004F61B8 /* PomodoroOneApp.swift */,
 				8B00808C2C5AE9DB00469A8A /* AppDelegate.swift */,
+				8B0080902C5AFED500469A8A /* Utilities */,
 				8B69F8DC2C5999D9004F61B8 /* Models */,
 				8B69F8D52C5964DD004F61B8 /* Views */,
 				8B69F8E12C59A77C004F61B8 /* Resources */,
@@ -102,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				8B69F8DD2C5999F3004F61B8 /* ModelData.swift */,
+				8B00808E2C5AF45C00469A8A /* UserConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,9 +200,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */,
+				8B00808F2C5AF45C00469A8A /* UserConfig.swift in Sources */,
 				8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */,
 				8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */,
 				8B00808D2C5AE9DB00469A8A /* AppDelegate.swift in Sources */,
+				8B0080922C5AFEDF00469A8A /* GenHelpers.swift in Sources */,
 				8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */,
 				8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */,
 				8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */,
