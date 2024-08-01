@@ -29,7 +29,7 @@ struct ContentView: View {
                     .fontWeight(.semibold)
                 Spacer()
                 Menu {
-                    Button("Next", action: {
+                    Button("Skip", action: {
                         confirmSkip = true
                     })
                     Button("Redo", role: .destructive, action: {

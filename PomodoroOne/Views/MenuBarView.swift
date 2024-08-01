@@ -12,6 +12,7 @@ struct MenuBarView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var soundPlayer: AVAudioPlayer?
     @ObservedObject var modelData: ModelData
+    let resizeFrame: (Bool)-> Void
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -32,9 +33,11 @@ struct MenuBarView: View {
     
     var body: some View {
         HStack{
-            Text(modelData.timerStringVal)
-                .font(.system(size: 15))
-                .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
+            if !modelData.isNotStarted {
+                Text(modelData.timerStringVal)
+                    .font(.system(size: 15))
+                    .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
+            }
             Image(menuBarFileName)
                 .resizable()
                 .frame(width: 17, height: 17)
@@ -54,6 +57,9 @@ struct MenuBarView: View {
                     // TODO
                 }
             }
+        }
+        .onChange(of: modelData.isNotStarted) {
+            resizeFrame(!modelData.isNotStarted)
         }
     }
 
@@ -101,7 +107,7 @@ struct MenuBarView_Preview: PreviewProvider {
     struct Container: View {
         @StateObject var modelData = ModelData()
         var body: some View {
-            MenuBarView(modelData: modelData)
+            MenuBarView(modelData: modelData, resizeFrame: {_ in})
         }
     }
     

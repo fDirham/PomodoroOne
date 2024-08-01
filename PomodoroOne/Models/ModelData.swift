@@ -78,6 +78,10 @@ class ModelData: ObservableObject {
         return .rest
     }
     
+    var isNotStarted: Bool {
+        return isPaused && (timerLeftS == timerStartS)
+    }
+    
     // Timer updates
     func handleTimerTick(){
         if isPaused {

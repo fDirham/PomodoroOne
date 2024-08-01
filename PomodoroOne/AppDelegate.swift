@@ -13,13 +13,15 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     let popover = NSPopover()
     private var statusBarItem: NSStatusItem! // Need to keep this otherwise menu item just disappears
-    
+    private var iconView: NSHostingView<MenuBarView>!
+    private let smallMenuWidth = 30
+    private let largeMenuWidth = 80
     
     var eventMonitor: EventMonitor?
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
-
+        
         // Add content view to pop over
         let contentView = ContentView(modelData: ModelData.shared)
         // Create a popover
@@ -28,9 +30,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.contentViewController = NSHostingController(rootView: contentView)
         
         // Create menu bar icon
-        let iconSwiftUI = MenuBarView(modelData: ModelData.shared)
-        let iconView = NSHostingView(rootView: iconSwiftUI)
-        iconView.frame = NSRect(x: 0, y: 0, width: 80, height: 22)
+        let iconSwiftUI = MenuBarView(modelData: ModelData.shared, resizeFrame: resizeFrame)
+        iconView = NSHostingView(rootView: iconSwiftUI)
+        iconView.frame = NSRect(x: 0, y: 0, width: smallMenuWidth, height: 22)
         
         if let button = statusBarItem.button {
             // Menu buttons
@@ -57,7 +59,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-        @objc func togglePopover(_ sender: AnyObject?) {
+    
+    @objc func togglePopover(_ sender: AnyObject?) {
         if popover.isShown {
             closePopover(sender)
         } else {
@@ -75,6 +78,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func closePopover(_ sender: AnyObject?) {
         popover.performClose(sender)
         eventMonitor?.stop()
+    }
+    
+    @objc func resizeFrame(enlarge: Bool){
+        let newWidth = enlarge ? largeMenuWidth : smallMenuWidth
+        let newFrame = NSRect(x: 0, y: 0, width: newWidth, height: 22)
+        if let button = statusBarItem.button {
+            // Menu buttons
+            iconView.frame = newFrame
+            button.frame = newFrame
+        }
     }
 }
 
