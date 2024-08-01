@@ -8,38 +8,37 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-class ModelData: ObservableObject {
+@Observable
+class ModelData {
     static var shared = ModelData()
     
-    @Published var timerStartS: Int = 3
-    @Published var timerLeftS: Int = 3
-    @Published var isPaused: Bool = true
+    var timerStartS: Int = 3
+    var timerLeftS: Int = 3
+    var isPaused: Bool = true
     
     // Keeping track of sessions
-    @Published var sessionIndex: Int = 0
-    @Published var restCounter: Int = 0
-    @Published var workCounter: Int = 0
-    @Published var targetWorkSessions: Int = 10
-    @Published var whenToLongRest: Int = 3
+    var sessionIndex: Int = 0
+    var restCounter: Int = 0
+    var workCounter: Int = 0
+    var targetWorkSessions: Int = 10
+    var whenToLongRest: Int = 3
     
     // Durations
     // TODO: Give better defaults and hook into config
-    @Published var workSessionDurationS = 3
-    @Published var restSessionDurationS = 2
-    @Published var longRestSessionDurationS = 4
-    @Published var isAutoPlay: Bool = false
-    @Published var isOvertime: Bool = false
-    @Published var isOvertimeAllowed: Bool = false
-
+    var workSessionDurationS = 3
+    var restSessionDurationS = 2
+    var longRestSessionDurationS = 4
+    var isAutoPlay: Bool = false
+    var isOvertime: Bool = false
+    var isOvertimeAllowed: Bool = false
+    
     // Keeping track of current day
-    @Published var lastOpenedAt: Date = Date.now
-    @Published var isNewDayButTimerRunning: Bool = false
+    var lastOpenedAt: Date = Date.now
+    var isNewDayButTimerRunning: Bool = false
     
     // Actions for contentView
-    @Published var contentViewAction: String? = nil
-    @Published var menuViewAction: String? = nil
-
+    var contentViewAction: String? = nil
+    var menuViewAction: String? = nil
     
     // Computed values
     var timerStringVal: String {
@@ -63,7 +62,7 @@ class ModelData: ObservableObject {
             return Double(timeElapsed) * 100 / Double(timerStartS)
         }
         else {
-           return 100
+            return 100
         }
     }
     
@@ -132,11 +131,11 @@ class ModelData: ObservableObject {
                 self.sessionIndex += 1
             }
         }
-
+        
         if !self.isAutoPlay {
             self.pauseTimer()
         }
-
+        
         let newSessionType = self.getSessionType()
         if newSessionType == SessionType.work {
             self.timerLeftS = self.workSessionDurationS
@@ -151,7 +150,7 @@ class ModelData: ObservableObject {
             self.timerStartS = self.longRestSessionDurationS
         }
     }
-
+    
     // User controls
     func handleActionButtonPress(){
         if self.isOvertime {
@@ -215,75 +214,4 @@ class ModelData: ObservableObject {
         self.menuViewAction = actionVal
     }
     
-    // Load and save user configs
-    private static func userConfigFileURL() throws -> URL {
-        let toReturn = try FileManager.default.url(for: .documentDirectory,
-                                    in: .userDomainMask,
-                                    appropriateFor: nil,
-                                    create: false)
-        .appendingPathComponent("config.data")
-        return toReturn
-    }
-    
-    enum UserConfigLoadError: Error {
-        case failedLoad
-        case failedSave
-    }
-    
-    func loadUserConfig() async throws {
-        if GenHelpers.isPreview {
-            return
-        }
-        
-        let task = Task<UserConfig, Error> {
-            let fileURL = try Self.userConfigFileURL()
-            guard let data = try? Data(contentsOf: fileURL) else {
-                throw UserConfigLoadError.failedLoad
-            }
-            let decoded = try JSONDecoder().decode(UserConfig.self, from: data)
-            return decoded
-        }
-        let userConfig = try await task.value
-        self.applyUserConfig(userConfig: userConfig)
-    }
-    
-    func saveUserConfig() async throws {
-        if GenHelpers.isPreview {
-            return
-        }
-        
-        let toSave = convertToUserConfig()
-        let task = Task {
-            let data = try JSONEncoder().encode(toSave)
-            let outfile = try Self.userConfigFileURL()
-            try data.write(to: outfile)
-        }
-        _ = try await task.value
-    }
-    
-    private func applyUserConfig(userConfig: UserConfig){
-        self.workSessionDurationS = userConfig.workDurationS
-        self.restSessionDurationS = userConfig.restDurationS
-        self.longRestSessionDurationS = userConfig.longRestDurationS
-        self.whenToLongRest = userConfig.whenToLongRest
-        self.targetWorkSessions = userConfig.targetWorkSessions
-        self.isAutoPlay = userConfig.autoPlay
-        self.isOvertimeAllowed = userConfig.overtimeAllowed
-        
-        // Might be hacky lmao
-        self.timerStartS = userConfig.workDurationS
-        self.timerLeftS = userConfig.workDurationS
-    }
-    
-    private func convertToUserConfig() -> UserConfig{
-        return UserConfig(
-            workDurationS: self.workSessionDurationS,
-            restDurationS: self.restSessionDurationS,
-            longRestDurationS: self.longRestSessionDurationS,
-            whenToLongRest: self.whenToLongRest,
-            targetWorkSessions: self.targetWorkSessions,
-            autoPlay: self.isAutoPlay,
-            overtimeAllowed: self.isOvertimeAllowed
-        )
-    }
 }

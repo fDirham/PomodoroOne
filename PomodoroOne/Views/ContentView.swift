@@ -9,9 +9,9 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @ObservedObject var modelData: ModelData
     @State private var confirmSkip: Bool = false
     @State private var confirmReset: Bool = false
+    @State private var modelData = ModelData.shared
 
     var topTextVal: String {
         if modelData.currentSessionType == ModelData.SessionType.work {
@@ -105,9 +105,9 @@ struct ContentView: View {
 
 struct ContentView_Preview: PreviewProvider {
     struct Container: View {
-        @StateObject var modelData = ModelData()
+        @State var modelData = ModelData()
         var body: some View {
-            ContentView(modelData: modelData)
+            ContentView().environment(modelData)
         }
     }
     

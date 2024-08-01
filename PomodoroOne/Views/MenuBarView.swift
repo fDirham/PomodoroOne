@@ -11,7 +11,7 @@ import AVFoundation
 struct MenuBarView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var soundPlayer: AVAudioPlayer?
-    @ObservedObject var modelData: ModelData
+    @State private var modelData = ModelData.shared
     let resizeFrame: (Bool)-> Void
     
     @Environment(\.colorScheme) var colorScheme
@@ -45,19 +45,7 @@ struct MenuBarView: View {
         .onReceive(timer) {_ in
             modelData.handleTimerTick()
         }
-        .onChange(of: modelData.menuViewAction, initial: false, handleModelDataAction)
-        .task {
-            do {
-                try await modelData.loadUserConfig()
-            } catch {
-                do{
-                    try await modelData.saveUserConfig()
-                }
-                catch {
-                    // TODO
-                }
-            }
-        }
+        .onChange(of: modelData.menuViewAction, handleModelDataAction)
         .onChange(of: modelData.isNotStarted) {
             resizeFrame(!modelData.isNotStarted)
         }
@@ -105,9 +93,11 @@ struct MenuBarView: View {
 
 struct MenuBarView_Preview: PreviewProvider {
     struct Container: View {
-        @StateObject var modelData = ModelData()
+        @State var modelData = ModelData()
+        
         var body: some View {
-            MenuBarView(modelData: modelData, resizeFrame: {_ in})
+            MenuBarView(resizeFrame: {_ in})
+                .environment(modelData)
         }
     }
     

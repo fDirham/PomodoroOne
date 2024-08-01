@@ -21,6 +21,10 @@
 		8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DD2C5999F3004F61B8 /* ModelData.swift */; };
 		8B69F8E02C59A776004F61B8 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8DF2C59A776004F61B8 /* ding.wav */; };
 		8BB5592D2C5C02620070A0EF /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5592C2C5C02620070A0EF /* EventMonitor.swift */; };
+		8BB5592F2C5C0EF10070A0EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */; };
+		8BB559322C5C0FA10070A0EF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */; };
+		8BB559342C5C0FAD0070A0EF /* IntervalsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */; };
+		8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB559362C5C17150070A0EF /* ObservableUserDefault */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,9 @@
 		8B69F8DD2C5999F3004F61B8 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		8B69F8DF2C59A776004F61B8 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 		8BB5592C2C5C02620070A0EF /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +113,7 @@
 		8B69F8D52C5964DD004F61B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BB559302C5C0F760070A0EF /* Settings */,
 				8B69F8D12C586020004F61B8 /* MenuBarView.swift */,
 				8B69F8A72C58165D004F61B8 /* ContentView.swift */,
 				8B69F8D32C596394004F61B8 /* CircleTimerView.swift */,
@@ -131,6 +140,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		8BB559302C5C0F760070A0EF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */,
+				8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */,
+				8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,6 +166,9 @@
 			dependencies = (
 			);
 			name = PomodoroOne;
+			packageProductDependencies = (
+				8BB559362C5C17150070A0EF /* ObservableUserDefault */,
+			);
 			productName = PomodoroOne;
 			productReference = 8B69F8A22C58165D004F61B8 /* PomodoroOne.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +197,9 @@
 				Base,
 			);
 			mainGroup = 8B69F8992C58165D004F61B8;
+			packageReferences = (
+				8BB559352C5C17150070A0EF /* XCRemoteSwiftPackageReference "ObservableUserDefault" */,
+			);
 			productRefGroup = 8B69F8A32C58165D004F61B8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -202,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB559322C5C0FA10070A0EF /* GeneralSettingsView.swift in Sources */,
 				8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */,
 				8B00808F2C5AF45C00469A8A /* UserConfig.swift in Sources */,
 				8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */,
@@ -211,7 +237,9 @@
 				8B0080922C5AFEDF00469A8A /* GenHelpers.swift in Sources */,
 				8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */,
 				8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */,
+				8BB5592F2C5C0EF10070A0EF /* SettingsView.swift in Sources */,
 				8B69F8A62C58165D004F61B8 /* PomodoroOneApp.swift in Sources */,
+				8BB559342C5C0FAD0070A0EF /* IntervalsSettingsView.swift in Sources */,
 				8B69F8DB2C596797004F61B8 /* CircleTimerKnob.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +443,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8BB559352C5C17150070A0EF /* XCRemoteSwiftPackageReference "ObservableUserDefault" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davidsteppenbeck/ObservableUserDefault?source=post_page-----9c924296a434--------------------------------";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8BB559362C5C17150070A0EF /* ObservableUserDefault */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BB559352C5C17150070A0EF /* XCRemoteSwiftPackageReference "ObservableUserDefault" */;
+			productName = ObservableUserDefault;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B69F89A2C58165D004F61B8 /* Project object */;
 }

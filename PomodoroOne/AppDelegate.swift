@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let popover = NSPopover()
     private var statusBarItem: NSStatusItem! // Need to keep this otherwise menu item just disappears
     private var iconView: NSHostingView<MenuBarView>!
-    private let smallMenuWidth = 30
+    private let smallMenuWidth = 35
     private let largeMenuWidth = 80
     
     var eventMonitor: EventMonitor?
@@ -23,21 +23,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
         
         // Add content view to pop over
-        let contentView = ContentView(modelData: ModelData.shared)
+        let contentView = ContentView()
         // Create a popover
         popover.contentSize = NSSize(width: 176, height: 220)
         // Embed our SwiftUI view into the popover
         popover.contentViewController = NSHostingController(rootView: contentView)
         
         // Create menu bar icon
-        let iconSwiftUI = MenuBarView(modelData: ModelData.shared, resizeFrame: resizeFrame)
+        let iconSwiftUI = MenuBarView(resizeFrame: resizeFrame)
         iconView = NSHostingView(rootView: iconSwiftUI)
-        iconView.frame = NSRect(x: 0, y: 0, width: smallMenuWidth, height: 22)
+        iconView?.frame = NSRect(x: 0, y: 0, width: smallMenuWidth, height: 22)
         
         if let button = statusBarItem.button {
             // Menu buttons
-            button.addSubview(iconView)
-            button.frame = iconView.frame
+            button.addSubview(iconView!)
+            button.frame = iconView!.frame
             
             // Register click action
             // See Functions file
@@ -85,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let newFrame = NSRect(x: 0, y: 0, width: newWidth, height: 22)
         if let button = statusBarItem.button {
             // Menu buttons
-            iconView.frame = newFrame
+            iconView!.frame = newFrame
             button.frame = newFrame
         }
     }
