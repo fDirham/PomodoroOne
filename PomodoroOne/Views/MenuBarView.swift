@@ -45,27 +45,38 @@ struct MenuBarView: View {
         .onReceive(timer) {_ in
             modelData.handleTimerTick()
         }
-        .onChange(of: modelData.menuViewAction, handleModelDataAction)
+        .onChange(of: modelData.soundAction, handleSoundAction)
+        .onChange(of: modelData.timerAction, handleTimerAction)
         .onChange(of: modelData.isNotStarted) {
             resizeFrame(!modelData.isNotStarted)
         }
     }
 
-    private func handleModelDataAction(){
-        if let actionVal = modelData.menuViewAction {
+    private func handleSoundAction(){
+        if let actionVal = modelData.soundAction {
             switch actionVal {
-            case "stopTimer":
-                stopTimer()
-            case "startTimer":
-                startTimer()
-            case "soundRestEnd":
+            case "playRestEnd":
                 playSound()
-            case "soundWorkEnd":
+            case "playWorkEnd":
                 playSound()
             default:
-                print("ERROR: Unsupported action for menu")
+                print("ERROR: Unsupported action for sound")
             }
-            modelData.menuViewAction = nil
+            modelData.soundAction = nil
+        }
+    }
+    
+    private func handleTimerAction(){
+        if let actionVal = modelData.timerAction {
+            switch actionVal {
+            case "stop":
+                stopTimer()
+            case "start":
+                startTimer()
+            default:
+                print("ERROR: Unsupported action for timer")
+            }
+            modelData.timerAction = nil
         }
     }
 

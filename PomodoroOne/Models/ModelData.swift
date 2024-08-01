@@ -37,8 +37,8 @@ class ModelData {
     var isNewDayButTimerRunning: Bool = false
     
     // Actions for contentView
-    var contentViewAction: String? = nil
-    var menuViewAction: String? = nil
+    var timerAction: String? = nil
+    var soundAction: String? = nil
     
     // Computed values
     var timerStringVal: String {
@@ -96,25 +96,24 @@ class ModelData {
     }
     
     private func handleTimerOnZero(){
-        if currentSessionType == SessionType.work {
-            invokeMenuViewAction(actionVal: "soundWorkEnd")
-        }
-        else {
-            invokeMenuViewAction(actionVal: "soundRestEnd")
-        }
-        
-        if isAutoPlay {
-            completeSession()
-        }
-        else{
-            if isOvertimeAllowed {
-                self.isOvertime = true
+            if self.currentSessionType == SessionType.work {
+                self.soundAction = "playWorkEnd"
             }
             else {
-                completeSession()
+                self.soundAction = "playRestEnd"
             }
-        }
         
+            if self.isAutoPlay {
+                self.completeSession()
+            }
+            else{
+                if self.isOvertimeAllowed {
+                    self.isOvertime = true
+                }
+                else {
+                    self.completeSession()
+                }
+        }
     }
     
     private func completeSession(){
@@ -168,12 +167,12 @@ class ModelData {
     
     func pauseTimer(){
         self.isPaused = true
-        invokeMenuViewAction(actionVal: "stopTimer")
+        self.timerAction = "stop"
     }
     
     func playTimer(){
         self.isPaused = false
-        invokeMenuViewAction(actionVal: "startTimer")
+        self.timerAction = "start"
     }
     
     func handleResetSession(){
@@ -204,14 +203,4 @@ class ModelData {
         
         return SessionType.rest
     }
-    
-    // View action invokes
-    private func invokeContentViewAction(actionVal: String) {
-        self.contentViewAction = actionVal
-    }
-    
-    private func invokeMenuViewAction(actionVal: String) {
-        self.menuViewAction = actionVal
-    }
-    
 }
