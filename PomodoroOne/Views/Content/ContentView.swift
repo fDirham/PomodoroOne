@@ -12,6 +12,9 @@ struct ContentView: View {
     @State private var confirmSkip: Bool = false
     @State private var confirmReset: Bool = false
     @State private var modelData = ModelData.shared
+    
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
 
     var topTextVal: String {
         if modelData.currentSessionType == ModelData.SessionType.work {
@@ -67,9 +70,9 @@ struct ContentView: View {
                 Text("Today \(modelData.workCounter)/\(modelData.targetWorkSessions)")
                 Spacer()
                 Menu {
-                    Button("Settings", action: {
-                        print("TODO")
-                    })
+                    Button("Settings") {
+                        appDelegate.openSettings()
+                    }
                     Button("Quit", action: {exit(0)})
                 } label: {
                     Image(systemName: "gearshape.fill")
@@ -107,7 +110,7 @@ struct ContentView_Preview: PreviewProvider {
     struct Container: View {
         @State var modelData = ModelData()
         var body: some View {
-            ContentView().environment(modelData)
+            ContentView()
         }
     }
     

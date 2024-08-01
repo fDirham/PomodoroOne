@@ -14,7 +14,7 @@ struct PomodoroOneApp: App {
 
     var body: some Scene {
         Settings {
-            EmptyView()
+            SettingsView()
         }
     }
     
@@ -22,11 +22,15 @@ struct PomodoroOneApp: App {
     // Uncomment for menu bar extra
 //    var body: some Scene {
 //        MenuBarExtra{
-//            ContentView(modelData: ModelData.shared)
+//            ContentView()
 //        } label: {
-//            MenuBarView(modelData: ModelData.shared)
+//            MenuBarView(resizeFrame: {_ in})
 //        }
 //        .menuBarExtraStyle(.window)
+//        
+//        Settings {
+//            SettingsView()
+//        }
 //    }
 }
 

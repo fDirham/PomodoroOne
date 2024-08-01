@@ -113,12 +113,9 @@
 		8B69F8D52C5964DD004F61B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8BB559302C5C0F760070A0EF /* Settings */,
 				8B69F8D12C586020004F61B8 /* MenuBarView.swift */,
-				8B69F8A72C58165D004F61B8 /* ContentView.swift */,
-				8B69F8D32C596394004F61B8 /* CircleTimerView.swift */,
-				8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */,
-				8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */,
+				8BB559382C5C34C50070A0EF /* Content */,
+				8BB559302C5C0F760070A0EF /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,6 +145,17 @@
 				8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		8BB559382C5C34C50070A0EF /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				8B69F8A72C58165D004F61B8 /* ContentView.swift */,
+				8B69F8D32C596394004F61B8 /* CircleTimerView.swift */,
+				8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */,
+				8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -17,6 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let smallMenuWidth = 35
     private let largeMenuWidth = 80
     
+    private var settingsWindow: NSWindow?
+    
     var eventMonitor: EventMonitor?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -80,7 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor?.stop()
     }
     
-    @objc func resizeFrame(enlarge: Bool){
+    func resizeFrame(enlarge: Bool){
         let newWidth = enlarge ? largeMenuWidth : smallMenuWidth
         let newFrame = NSRect(x: 0, y: 0, width: newWidth, height: 22)
         if let button = statusBarItem.button {
@@ -88,6 +90,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             iconView!.frame = newFrame
             button.frame = newFrame
         }
+    }
+    
+    func openSettings(){
+        if self.settingsWindow == nil {
+            let newWindow = NSWindow()
+            let contentViewSwiftUI = SettingsView()
+            let contentView = NSHostingView(rootView: contentViewSwiftUI)
+            contentView.frame = NSRect(x: 0, y: 0, width: 300, height: 200)
+            
+            newWindow.contentView = contentView
+            newWindow.title = "New Window"
+            newWindow.isOpaque = false
+            newWindow.isMovableByWindowBackground = true
+            var frame = newWindow.frame
+            frame.size = NSMakeSize(300, 200 )
+            newWindow.setFrame(frame, display: true)
+
+            self.settingsWindow = newWindow
+        }
+        else {
+            self.settingsWindow!.collectionBehavior.insert(.moveToActiveSpace)
+        }
+        self.settingsWindow!.center()
+        self.settingsWindow!.orderFrontRegardless()
     }
 }
 
