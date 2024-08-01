@@ -42,6 +42,9 @@ struct MenuBarView: View {
                 .resizable()
                 .frame(width: 17, height: 17)
         }
+        .task {
+            modelData.loadInitValues()
+        }
         .onReceive(timer) {_ in
             modelData.handleTimerTick()
         }

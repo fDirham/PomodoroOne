@@ -7,30 +7,51 @@
 
 import Foundation
 import SwiftUI
+import ObservableUserDefault
 
-@Observable
-class ModelData {
+@Observable class ModelData {
     static var shared = ModelData()
     
-    var timerStartS: Int = 3
-    var timerLeftS: Int = 3
+    var timerStartS: Int = 0
+    var timerLeftS: Int = 0
     var isPaused: Bool = true
     
     // Keeping track of sessions
     var sessionIndex: Int = 0
     var restCounter: Int = 0
     var workCounter: Int = 0
-    var targetWorkSessions: Int = 10
-    var whenToLongRest: Int = 3
-    
-    // Durations
-    // TODO: Give better defaults and hook into config
-    var workSessionDurationS = 3
-    var restSessionDurationS = 2
-    var longRestSessionDurationS = 4
-    var isAutoPlay: Bool = false
     var isOvertime: Bool = false
-    var isOvertimeAllowed: Bool = false
+
+    // Target configs
+    @ObservableUserDefault(.init(key: "TARGET_WORK_SESSIONS", defaultValue: 10, store: .standard))
+    @ObservationIgnored
+    var targetWorkSessions: Int
+    
+    @ObservableUserDefault(.init(key: "WHEN_TO_LONG_REST", defaultValue: 4, store: .standard))
+    @ObservationIgnored
+    var whenToLongRest: Int
+    
+    // Duration configs
+    // TODO: Set better defaults
+    @ObservableUserDefault(.init(key: "DURATION_WORK_SESH", defaultValue: 5, store: .standard))
+    @ObservationIgnored
+    var workSessionDurationS: Int
+    
+    @ObservableUserDefault(.init(key: "DURATION_REST_SESH", defaultValue: 4, store: .standard))
+    @ObservationIgnored
+    var restSessionDurationS: Int
+    
+    @ObservableUserDefault(.init(key: "DURATION_LONG_REST_SESH", defaultValue: 6, store: .standard))
+    @ObservationIgnored
+    var longRestSessionDurationS: Int
+    
+    @ObservableUserDefault(.init(key: "AUTO_PLAY_ENABLED", defaultValue: false, store: .standard))
+    @ObservationIgnored
+    var isAutoPlay: Bool
+    
+    @ObservableUserDefault(.init(key: "OVER_TIME_ENABLED", defaultValue: true, store: .standard))
+    @ObservationIgnored
+    var isOvertimeAllowed: Bool
     
     // Keeping track of current day
     var lastOpenedAt: Date = Date.now
@@ -90,7 +111,7 @@ class ModelData {
             timerLeftS -= 1
         }
         
-        if timerLeftS <= 0{
+        if timerLeftS == 0{
             self.handleTimerOnZero()
         }
     }
@@ -202,5 +223,11 @@ class ModelData {
         }
         
         return SessionType.rest
+    }
+    
+    // Set up
+    func loadInitValues(){
+        self.timerStartS = self.workSessionDurationS
+        self.timerLeftS = self.workSessionDurationS
     }
 }
