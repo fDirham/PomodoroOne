@@ -10,6 +10,8 @@ import SwiftUI
 
 @MainActor
 class ModelData: ObservableObject {
+    static var shared = ModelData()
+    
     @Published var timerStartS: Int = 3
     @Published var timerLeftS: Int = 3
     @Published var isPaused: Bool = true

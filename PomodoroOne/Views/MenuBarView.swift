@@ -32,11 +32,9 @@ struct MenuBarView: View {
     
     var body: some View {
         HStack{
-            if !modelData.isPaused {
-                Text(modelData.timerStringVal)
-                    .font(.system(size: 14))
-                    .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
-            }
+            Text(modelData.timerStringVal)
+                .font(.system(size: 15))
+                .foregroundStyle(modelData.isOvertime ? modelData.activeColor : .foreground)
             Image(menuBarFileName)
                 .resizable()
                 .frame(width: 17, height: 17)

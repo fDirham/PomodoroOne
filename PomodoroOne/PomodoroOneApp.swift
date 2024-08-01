@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 @main
 struct PomodoroOneApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -17,13 +18,13 @@ struct PomodoroOneApp: App {
         }
     }
     
+    
     // Uncomment for menu bar extra
-//    @StateObject private var modelData = ModelData()
 //    var body: some Scene {
 //        MenuBarExtra{
-//            ContentView(modelData: modelData)
+//            ContentView(modelData: ModelData.shared)
 //        } label: {
-//            MenuBarView(modelData: modelData)
+//            MenuBarView(modelData: ModelData.shared)
 //        }
 //        .menuBarExtraStyle(.window)
 //    }

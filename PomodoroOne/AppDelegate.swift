@@ -11,107 +11,70 @@ import SwiftUI
 
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private var modelData: ModelData!
-    private var popover: NSPopover!
+    let popover = NSPopover()
     private var statusBarItem: NSStatusItem! // Need to keep this otherwise menu item just disappears
-    let invisibleWindow = NSWindow(contentRect: NSMakeRect(0, 0, 20, 5), styleMask: .borderless, backing: .buffered, defer: false)
     
+    
+    var eventMonitor: EventMonitor?
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.modelData = ModelData()
-        
         statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
-        invisibleWindow.backgroundColor = .red
-        invisibleWindow.alphaValue = 0
-        
-        // Get SwiftUI View
-        let contentView = ContentView(modelData: modelData)
+
+        // Add content view to pop over
+        let contentView = ContentView(modelData: ModelData.shared)
         // Create a popover
-        let popover = NSPopover()
         popover.contentSize = NSSize(width: 176, height: 220)
-        popover.behavior = .transient
         // Embed our SwiftUI view into the popover
         popover.contentViewController = NSHostingController(rootView: contentView)
-        // Register it
-        self.popover = popover
-        self.popover.contentViewController?.view.window?.becomeKey()
         
-        
-        let iconSwiftUI = MenuBarView(modelData: modelData)
+        // Create menu bar icon
+        let iconSwiftUI = MenuBarView(modelData: ModelData.shared)
         let iconView = NSHostingView(rootView: iconSwiftUI)
         iconView.frame = NSRect(x: 0, y: 0, width: 80, height: 22)
         
         if let button = statusBarItem.button {
-            
             // Menu buttons
             button.addSubview(iconView)
             button.frame = iconView.frame
             
             // Register click action
             // See Functions file
-            button.action = #selector(togglePopover(_:))
+            button.action = #selector(AppDelegate.togglePopover(_:))
             // Dispatch click states
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
+        
+        eventMonitor = EventMonitor(mask: [NSEvent.EventTypeMask.leftMouseDown, NSEvent.EventTypeMask.rightMouseDown]) { [weak self] event in
+            if let popover = self?.popover {
+                if popover.isShown {
+                    self?.closePopover(event)
+                }
+            }
+        }
+        eventMonitor?.start()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-}
-
-extension AppDelegate {
-
-    @objc func openAbout() {
-        print("Open about")
-    }
-    
-    @objc func quit() {
-        NSApp.terminate(self)
-    }
-    
-    func closePopover() {
-        popover.close()
-    }
-    
-    @objc func doStuff() {
-        print("Do stuff")
-    }
-    
-    @objc func togglePopover(_ sender: AnyObject?) {
-        let event = NSApp.currentEvent!
-        
-        if event.type == NSEvent.EventType.leftMouseUp {
-            if let sbutton = statusBarItem.button {
-                if popover.isShown {
-                    popover.performClose(sender)
-                } else {
-                    // find the coordinates of the statusBarItem in screen space
-                    let buttonRect: NSRect = sbutton.convert(sbutton.bounds, to: nil)
-                    let screenRect: NSRect = sbutton.window!.convertToScreen(buttonRect)
-                    
-                    // calculate the bottom center position (10 is the half of the window width)
-                    let posX = screenRect.origin.x + (screenRect.width / 2) - 10
-                    let posY = screenRect.origin.y
-                    
-                    // position and show the window
-                    invisibleWindow.setFrameOrigin(NSPoint(x: posX, y: posY))
-                    invisibleWindow.makeKeyAndOrderFront(self)
-                    NSApplication.shared.presentationOptions = []
-                    // position and show the NSPopover
-                    popover.show(relativeTo: invisibleWindow.contentView!.frame, of: invisibleWindow.contentView!, preferredEdge: NSRectEdge.minY)
-                    NSApp.activate(ignoringOtherApps: true)
-                }
-            }
-        } else if event.type == NSEvent.EventType.rightMouseUp {
-            let menu = NSMenu()
-            menu.addItem(withTitle: "About PomodoroOne", action: #selector(openAbout), keyEquivalent: "c")
-            menu.addItem(NSMenuItem.separator())
-            menu.addItem(NSMenuItem(title: "PomodoroOne v1.0", action: nil, keyEquivalent: ""))
-            menu.addItem(withTitle: "Quit App", action: #selector(quit), keyEquivalent: "q")
-            
-            statusBarItem.menu = menu
-            statusBarItem.button?.performClick(nil)
-            statusBarItem.menu = nil
+        @objc func togglePopover(_ sender: AnyObject?) {
+        if popover.isShown {
+            closePopover(sender)
+        } else {
+            showPopover(sender)
         }
     }
+    
+    func showPopover(_ sender: AnyObject?) {
+        if let button = statusBarItem.button {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            eventMonitor?.start()
+        }
+    }
+    
+    func closePopover(_ sender: AnyObject?) {
+        popover.performClose(sender)
+        eventMonitor?.stop()
+    }
 }
+
