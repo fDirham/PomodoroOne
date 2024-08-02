@@ -108,7 +108,6 @@ struct ContentView: View {
 
 struct ContentView_Preview: PreviewProvider {
     struct Container: View {
-        @State var modelData = ModelData()
         var body: some View {
             ContentView()
         }

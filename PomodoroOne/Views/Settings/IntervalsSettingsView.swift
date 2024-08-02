@@ -8,11 +8,41 @@
 import SwiftUI
 
 struct IntervalsSettingsView: View {
+    @Binding var modelData: ModelData
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            VStack{
+                Spacer()
+                Section(header: Text("Durations")){
+                    TimeTextField(title: "Work duration", timeS: $modelData.workSessionDurationS)
+                    TimeTextField(title: "Rest duration", timeS: $modelData.restSessionDurationS)
+                    TimeTextField(title: "Long rest duration", timeS: $modelData.longRestSessionDurationS)
+                }
+                Spacer()
+                Section(header: Text("Frequencies")){
+                    TextField("Target work sessions per day", value: $modelData.targetWorkSessions, format: .number)
+                    TextField("Long rest every _ rest sessions", value: $modelData.whenToLongRest, format: .number)
+                        .textFieldStyle(.roundedBorder)
+                }
+                Spacer()
+            }
+        }
+        .padding()
+        .defaultAppStorage(.standard)
     }
 }
 
-#Preview {
-    IntervalsSettingsView()
+struct IntervalsSettingsView_Preview: PreviewProvider {
+    struct Container: View {
+        @State private var modelData = ModelData()
+        
+        var body: some View {
+            IntervalsSettingsView(modelData: $modelData)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
 }

@@ -25,6 +25,7 @@
 		8BB559322C5C0FA10070A0EF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */; };
 		8BB559342C5C0FAD0070A0EF /* IntervalsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */; };
 		8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB559362C5C17150070A0EF /* ObservableUserDefault */; };
+		8BB5593C2C5D58D90070A0EF /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsSettingsView.swift; sourceTree = "<group>"; };
+		8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */,
 				8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */,
 				8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */,
+				8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				8BB559322C5C0FA10070A0EF /* GeneralSettingsView.swift in Sources */,
 				8B69F8A82C58165D004F61B8 /* ContentView.swift in Sources */,
+				8BB5593C2C5D58D90070A0EF /* TimeTextField.swift in Sources */,
 				8B00808F2C5AF45C00469A8A /* UserConfig.swift in Sources */,
 				8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */,
 				8BB5592D2C5C02620070A0EF /* EventMonitor.swift in Sources */,

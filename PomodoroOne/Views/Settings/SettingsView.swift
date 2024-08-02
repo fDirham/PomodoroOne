@@ -13,9 +13,9 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            GeneralSettingsView()
+            GeneralSettingsView(modelData: $modelData)
                 .tabItem { Label("General", systemImage: "gear") }
-            IntervalsSettingsView()
+            IntervalsSettingsView(modelData: $modelData)
                 .tabItem { Label("Intervals", systemImage: "clock.fill") }
         }
         .scenePadding()

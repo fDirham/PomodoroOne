@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct GeneralSettingsView: View {
-    @AppStorage("testVal") private var testVal = "hello there"
+    @Binding var modelData: ModelData
     
     var body: some View {
         Form {
-            TextField("wow", text: $testVal)
+            VStack{
+                Toggle("allow over time", isOn: $modelData.isOvertimeAllowed)
+                Toggle("auto start next session", isOn: $modelData.isAutoPlay)
+            }
         }
+        .padding()
+        .defaultAppStorage(.standard)
     }
 }
 
-#Preview {
-    GeneralSettingsView()
+struct GeneralSettingsView_Preview: PreviewProvider {
+    struct Container: View {
+        @State private var modelData = ModelData()
+
+        var body: some View {
+            GeneralSettingsView(modelData: $modelData)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
 }

@@ -33,15 +33,15 @@ import ObservableUserDefault
     
     // Duration configs
     // TODO: Set better defaults
-    @ObservableUserDefault(.init(key: "DURATION_WORK_SESH", defaultValue: 5, store: .standard))
+    @ObservableUserDefault(.init(key: "DURATION_WORK_SESH", defaultValue: 1500, store: .standard))
     @ObservationIgnored
     var workSessionDurationS: Int
     
-    @ObservableUserDefault(.init(key: "DURATION_REST_SESH", defaultValue: 4, store: .standard))
+    @ObservableUserDefault(.init(key: "DURATION_REST_SESH", defaultValue: 300, store: .standard))
     @ObservationIgnored
     var restSessionDurationS: Int
     
-    @ObservableUserDefault(.init(key: "DURATION_LONG_REST_SESH", defaultValue: 6, store: .standard))
+    @ObservableUserDefault(.init(key: "DURATION_LONG_REST_SESH", defaultValue: 900, store: .standard))
     @ObservationIgnored
     var longRestSessionDurationS: Int
     
