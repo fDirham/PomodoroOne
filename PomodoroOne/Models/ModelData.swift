@@ -54,6 +54,15 @@ import KeyboardShortcuts
     @ObservationIgnored
     var isOvertimeAllowed: Bool
     
+    // Sound settings
+    @ObservableUserDefault(.init(key: "SOUND_REST_END", defaultValue: "sound-alarm-clock", store: .standard))
+    @ObservationIgnored
+    var soundRestEnd: String
+    
+    @ObservableUserDefault(.init(key: "SOUND_WORK_END", defaultValue: "sound-alarm-clock", store: .standard))
+    @ObservationIgnored
+    var soundWorkEnd: String
+
     // Constructor
     init() {
         KeyboardShortcuts.onKeyUp(for: .startPauseSession) { [self] in
@@ -68,6 +77,7 @@ import KeyboardShortcuts
     // Actions for contentView
     var timerAction: String? = nil
     var soundAction: String? = nil
+    
     
     // Computed values
     var timerStringVal: String {
@@ -206,7 +216,20 @@ import KeyboardShortcuts
     
     func handleResetSession(){
         self.isPaused = true
-        self.timerLeftS = self.timerStartS
+        
+        let currSessionType = self.getSessionType()
+        if currSessionType == SessionType.work {
+            self.timerLeftS = self.workSessionDurationS
+            self.timerStartS = self.workSessionDurationS
+        }
+        if currSessionType == SessionType.rest {
+            self.timerLeftS = self.restSessionDurationS
+            self.timerStartS = self.restSessionDurationS
+        }
+        if currSessionType == SessionType.longRest {
+            self.timerLeftS = self.longRestSessionDurationS
+            self.timerStartS = self.longRestSessionDurationS
+        }
     }
     
     func handleSkipSession(){

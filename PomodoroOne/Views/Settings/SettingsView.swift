@@ -17,6 +17,8 @@ struct SettingsView: View {
                 .tabItem { Label("General", systemImage: "gear") }
             IntervalsSettingsView(modelData: $modelData)
                 .tabItem { Label("Intervals", systemImage: "clock.fill") }
+            SoundSettingsView(modelData: $modelData)
+                .tabItem { Label("Sound", systemImage: "speaker.fill") }
         }
         .scenePadding()
         .frame(maxWidth: 350, minHeight: 100)

@@ -59,9 +59,9 @@ struct MenuBarView: View {
         if let actionVal = modelData.soundAction {
             switch actionVal {
             case "playRestEnd":
-                playSound()
+                playSound(sessionType: .rest)
             case "playWorkEnd":
-                playSound()
+                playSound(sessionType: .work)
             default:
                 print("ERROR: Unsupported action for sound")
             }
@@ -91,8 +91,12 @@ struct MenuBarView: View {
         self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
     
-    private func playSound() {
-        guard let soundURL = Bundle.main.url(forResource: "ding", withExtension: "wav") else {
+    private func playSound(sessionType: ModelData.SessionType) {
+        let soundFileName = (sessionType == ModelData.SessionType.work)
+        ? modelData.soundWorkEnd
+        : modelData.soundRestEnd
+        
+        guard let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: "wav") else {
             return
         }
         

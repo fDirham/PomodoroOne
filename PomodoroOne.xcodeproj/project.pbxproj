@@ -19,7 +19,6 @@
 		8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */; };
 		8B69F8DB2C596797004F61B8 /* CircleTimerKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */; };
 		8B69F8DE2C5999F3004F61B8 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69F8DD2C5999F3004F61B8 /* ModelData.swift */; };
-		8B69F8E02C59A776004F61B8 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B69F8DF2C59A776004F61B8 /* ding.wav */; };
 		8BB5592D2C5C02620070A0EF /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5592C2C5C02620070A0EF /* EventMonitor.swift */; };
 		8BB5592F2C5C0EF10070A0EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */; };
 		8BB559322C5C0FA10070A0EF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */; };
@@ -27,6 +26,12 @@
 		8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB559362C5C17150070A0EF /* ObservableUserDefault */; };
 		8BB5593C2C5D58D90070A0EF /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */; };
 		8BB5593F2C5D87AF0070A0EF /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB5593E2C5D87AF0070A0EF /* KeyboardShortcuts */; };
+		8BB559442C5D96D90070A0EF /* sound-chime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB559402C5D96D80070A0EF /* sound-chime.wav */; };
+		8BB559452C5D96D90070A0EF /* sound-alarm-clock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB559412C5D96D90070A0EF /* sound-alarm-clock.wav */; };
+		8BB559462C5D96D90070A0EF /* sound-drums.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB559422C5D96D90070A0EF /* sound-drums.wav */; };
+		8BB559472C5D96D90070A0EF /* sound-trap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB559432C5D96D90070A0EF /* sound-trap.wav */; };
+		8BB559492C5D9C5C0070A0EF /* SoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559482C5D9C5C0070A0EF /* SoundSettingsView.swift */; };
+		8BB5594B2C5D9E750070A0EF /* AppSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5594A2C5D9E750070A0EF /* AppSounds.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,12 +49,17 @@
 		8B69F8D82C596515004F61B8 /* CircleTimerArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerArc.swift; sourceTree = "<group>"; };
 		8B69F8DA2C596797004F61B8 /* CircleTimerKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTimerKnob.swift; sourceTree = "<group>"; };
 		8B69F8DD2C5999F3004F61B8 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
-		8B69F8DF2C59A776004F61B8 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 		8BB5592C2C5C02620070A0EF /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsSettingsView.swift; sourceTree = "<group>"; };
 		8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTextField.swift; sourceTree = "<group>"; };
+		8BB559402C5D96D80070A0EF /* sound-chime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "sound-chime.wav"; path = "PomodoroOne/AssetFolder/sound-chime.wav"; sourceTree = SOURCE_ROOT; };
+		8BB559412C5D96D90070A0EF /* sound-alarm-clock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "sound-alarm-clock.wav"; path = "PomodoroOne/AssetFolder/sound-alarm-clock.wav"; sourceTree = SOURCE_ROOT; };
+		8BB559422C5D96D90070A0EF /* sound-drums.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "sound-drums.wav"; path = "PomodoroOne/AssetFolder/sound-drums.wav"; sourceTree = SOURCE_ROOT; };
+		8BB559432C5D96D90070A0EF /* sound-trap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "sound-trap.wav"; path = "PomodoroOne/AssetFolder/sound-trap.wav"; sourceTree = SOURCE_ROOT; };
+		8BB559482C5D9C5C0070A0EF /* SoundSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingsView.swift; sourceTree = "<group>"; };
+		8BB5594A2C5D9E750070A0EF /* AppSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSounds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,7 @@
 			children = (
 				8B69F8DD2C5999F3004F61B8 /* ModelData.swift */,
 				8B00808E2C5AF45C00469A8A /* UserConfig.swift */,
+				8BB5594A2C5D9E750070A0EF /* AppSounds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,7 +147,10 @@
 		8B69F8E12C59A77C004F61B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8B69F8DF2C59A776004F61B8 /* ding.wav */,
+				8BB559412C5D96D90070A0EF /* sound-alarm-clock.wav */,
+				8BB559402C5D96D80070A0EF /* sound-chime.wav */,
+				8BB559422C5D96D90070A0EF /* sound-drums.wav */,
+				8BB559432C5D96D90070A0EF /* sound-trap.wav */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -146,6 +160,7 @@
 			children = (
 				8BB5592E2C5C0EF10070A0EF /* SettingsView.swift */,
 				8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */,
+				8BB559482C5D9C5C0070A0EF /* SoundSettingsView.swift */,
 				8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */,
 				8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */,
 			);
@@ -229,8 +244,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B69F8E02C59A776004F61B8 /* ding.wav in Resources */,
 				8B69F8AD2C581660004F61B8 /* Preview Assets.xcassets in Resources */,
+				8BB559462C5D96D90070A0EF /* sound-drums.wav in Resources */,
+				8BB559452C5D96D90070A0EF /* sound-alarm-clock.wav in Resources */,
+				8BB559472C5D96D90070A0EF /* sound-trap.wav in Resources */,
+				8BB559442C5D96D90070A0EF /* sound-chime.wav in Resources */,
 				8B69F8AA2C581660004F61B8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +267,8 @@
 				8B69F8D22C586020004F61B8 /* MenuBarView.swift in Sources */,
 				8BB5592D2C5C02620070A0EF /* EventMonitor.swift in Sources */,
 				8B69F8D42C596394004F61B8 /* CircleTimerView.swift in Sources */,
+				8BB5594B2C5D9E750070A0EF /* AppSounds.swift in Sources */,
+				8BB559492C5D9C5C0070A0EF /* SoundSettingsView.swift in Sources */,
 				8B00808D2C5AE9DB00469A8A /* AppDelegate.swift in Sources */,
 				8B0080922C5AFEDF00469A8A /* GenHelpers.swift in Sources */,
 				8B69F8D92C596515004F61B8 /* CircleTimerArc.swift in Sources */,
