@@ -9,11 +9,16 @@ import Foundation
 import Cocoa
 import SwiftUI
 
+class AlwaysKeyWindow : NSWindow {
+    override var canBecomeMain: Bool { return true }
+    override var canBecomeKey: Bool { return true }
+}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     let popover = NSPopover()
     private var statusBarItem: NSStatusItem! // Need to keep this otherwise menu item just disappears
     private var iconView: NSHostingView<MenuBarView>!
+    private var invisPopupWindow: NSWindow!
     private let smallMenuWidth = 35
     private let largeMenuWidth = 80
     
@@ -35,6 +40,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let iconSwiftUI = MenuBarView(resizeFrame: resizeFrame)
         iconView = NSHostingView(rootView: iconSwiftUI)
         iconView?.frame = NSRect(x: 0, y: 0, width: smallMenuWidth, height: 22)
+        
+        
+        // Create invisible window
+        invisPopupWindow = AlwaysKeyWindow(contentRect: NSMakeRect(0, 0, 20, 1), styleMask: .borderless, backing: .buffered, defer: false)
+        invisPopupWindow.backgroundColor = .red
+        invisPopupWindow.alphaValue = 0
+        invisPopupWindow.hidesOnDeactivate = true
         
         if let button = statusBarItem.button {
             // Menu buttons
@@ -72,7 +84,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func showPopover(_ sender: AnyObject?) {
         if let button = statusBarItem.button {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            self.invisPopupWindow.collectionBehavior.insert(.moveToActiveSpace)
+            
+            // find the coordinates of the statusBarItem in screen space
+            let buttonRect:NSRect = button.convert(button.bounds, to: nil)
+            let screenRect:NSRect = button.window!.convertToScreen(buttonRect)
+            
+            // calculate the bottom center position (10 is the half of the window width)
+            let posX = screenRect.origin.x + (screenRect.width / 2) - 10
+            let posY = screenRect.origin.y
+            
+            // position and show the window
+            self.invisPopupWindow.setFrameOrigin(NSPoint(x: posX, y: posY))
+            self.invisPopupWindow.makeKeyAndOrderFront(self)
+            NSApp.activate(ignoringOtherApps: true)
+
+            // Show popover
+            self.popover.show(relativeTo: self.invisPopupWindow.contentView!.frame, of: self.invisPopupWindow.contentView!, preferredEdge: NSRectEdge.minY)
+            
             eventMonitor?.start()
         }
     }
