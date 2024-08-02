@@ -26,6 +26,7 @@
 		8BB559342C5C0FAD0070A0EF /* IntervalsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */; };
 		8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB559362C5C17150070A0EF /* ObservableUserDefault */; };
 		8BB5593C2C5D58D90070A0EF /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */; };
+		8BB5593F2C5D87AF0070A0EF /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 8BB5593E2C5D87AF0070A0EF /* KeyboardShortcuts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB559372C5C17150070A0EF /* ObservableUserDefault in Frameworks */,
+				8BB5593F2C5D87AF0070A0EF /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +181,7 @@
 			name = PomodoroOne;
 			packageProductDependencies = (
 				8BB559362C5C17150070A0EF /* ObservableUserDefault */,
+				8BB5593E2C5D87AF0070A0EF /* KeyboardShortcuts */,
 			);
 			productName = PomodoroOne;
 			productReference = 8B69F8A22C58165D004F61B8 /* PomodoroOne.app */;
@@ -210,6 +213,7 @@
 			mainGroup = 8B69F8992C58165D004F61B8;
 			packageReferences = (
 				8BB559352C5C17150070A0EF /* XCRemoteSwiftPackageReference "ObservableUserDefault" */,
+				8BB5593D2C5D87AF0070A0EF /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = 8B69F8A32C58165D004F61B8 /* Products */;
 			projectDirPath = "";
@@ -465,6 +469,14 @@
 				minimumVersion = 1.3.1;
 			};
 		};
+		8BB5593D2C5D87AF0070A0EF /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -472,6 +484,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8BB559352C5C17150070A0EF /* XCRemoteSwiftPackageReference "ObservableUserDefault" */;
 			productName = ObservableUserDefault;
+		};
+		8BB5593E2C5D87AF0070A0EF /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BB5593D2C5D87AF0070A0EF /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

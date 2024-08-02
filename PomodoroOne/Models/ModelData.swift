@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import ObservableUserDefault
+import KeyboardShortcuts
 
 @Observable class ModelData {
     static var shared = ModelData()
@@ -52,6 +53,13 @@ import ObservableUserDefault
     @ObservableUserDefault(.init(key: "OVER_TIME_ENABLED", defaultValue: true, store: .standard))
     @ObservationIgnored
     var isOvertimeAllowed: Bool
+    
+    // Constructor
+    init() {
+        KeyboardShortcuts.onKeyUp(for: .startPauseSession) { [self] in
+            self.handleActionButtonPress()
+        }
+    }
     
     // Keeping track of current day
     var lastOpenedAt: Date = Date.now

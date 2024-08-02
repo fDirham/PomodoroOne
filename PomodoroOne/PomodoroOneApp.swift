@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import KeyboardShortcuts
+
+extension KeyboardShortcuts.Name {
+    static let startPauseSession = Self("startPauseSession")
+}
 
 
 @main

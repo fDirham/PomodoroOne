@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KeyboardShortcuts
 
 struct GeneralSettingsView: View {
     @Binding var modelData: ModelData
@@ -13,8 +14,13 @@ struct GeneralSettingsView: View {
     var body: some View {
         Form {
             VStack{
-                Toggle("allow over time", isOn: $modelData.isOvertimeAllowed)
-                Toggle("auto start next session", isOn: $modelData.isAutoPlay)
+                Section {
+                    Toggle("Over time", isOn: $modelData.isOvertimeAllowed)
+                    Toggle("Auto start next session", isOn: $modelData.isAutoPlay)
+                }
+                Section(header: Text("Keyboard shortcuts")) {
+                    KeyboardShortcuts.Recorder("Start / Pause session", name: .startPauseSession)
+                }
             }
         }
         .padding()
@@ -27,7 +33,10 @@ struct GeneralSettingsView_Preview: PreviewProvider {
         @State private var modelData = ModelData()
 
         var body: some View {
-            GeneralSettingsView(modelData: $modelData)
+            TabView{
+                GeneralSettingsView(modelData: $modelData)
+            }
+            .padding()
         }
     }
     
