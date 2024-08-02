@@ -123,26 +123,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func openSettings(){
         if self.settingsWindow == nil {
-            let newWindow = NSWindow()
             let contentViewSwiftUI = SettingsView()
             let contentView = NSHostingView(rootView: contentViewSwiftUI)
-            contentView.frame = NSRect(x: 0, y: 0, width: 300, height: 200)
-            
+            let newWindow = NSWindow(contentViewController: NSHostingController(rootView: contentViewSwiftUI))
+
             newWindow.contentView = contentView
-            newWindow.title = "New Window"
+            newWindow.title = "Settings"
             newWindow.isOpaque = false
             newWindow.isMovableByWindowBackground = true
-            var frame = newWindow.frame
-            frame.size = NSMakeSize(300, 200 )
-            newWindow.setFrame(frame, display: true)
-
+            newWindow.hidesOnDeactivate = true
             self.settingsWindow = newWindow
         }
         else {
             self.settingsWindow!.collectionBehavior.insert(.moveToActiveSpace)
         }
         self.settingsWindow!.center()
-        self.settingsWindow!.orderFrontRegardless()
+        self.settingsWindow!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
 

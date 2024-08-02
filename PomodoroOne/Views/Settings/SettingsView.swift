@@ -20,6 +20,7 @@ struct SettingsView: View {
         }
         .scenePadding()
         .frame(maxWidth: 350, minHeight: 100)
+        .fixedSize()
         .focused($isViewFocused)
     }
 }

@@ -38,7 +38,9 @@ struct IntervalsSettingsView_Preview: PreviewProvider {
         @State private var modelData = ModelData()
         
         var body: some View {
-            IntervalsSettingsView(modelData: $modelData)
+            TabView{
+                IntervalsSettingsView(modelData: $modelData)
+            }.padding()
         }
     }
     

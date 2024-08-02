@@ -86,6 +86,7 @@ struct ContentView: View {
         }
         .padding()
         .frame(width: 176, height: 220)
+        .fixedSize()
         .confirmationDialog("Skip session", isPresented: $confirmSkip) {
             Button("Skip", role: .destructive) {
                 modelData.handleSkipSession()
