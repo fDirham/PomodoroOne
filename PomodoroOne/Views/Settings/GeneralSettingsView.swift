@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import KeyboardShortcuts
 
 struct GeneralSettingsView: View {
     @Binding var modelData: ModelData
@@ -14,14 +13,16 @@ struct GeneralSettingsView: View {
     var body: some View {
         Form {
             VStack{
-                Section {
-                    Toggle("Over time", isOn: $modelData.isOvertimeAllowed)
-                    Toggle("Auto start next session", isOn: $modelData.isAutoPlay)
-                }
-                Section(header: Text("Keyboard shortcuts")) {
-                    KeyboardShortcuts.Recorder("Start / Pause session", name: .startPauseSession)
-                }
+                SettingsSectionHeaderView("General", isFirst:true)
+                Toggle("Over time", isOn: $modelData.isOvertimeAllowed)
+                    .toggleStyle(ToggleSettingsStyle())
+                Toggle("Auto start next session", isOn: $modelData.isAutoPlay)
+                    .toggleStyle(ToggleSettingsStyle())
+                SettingsSectionHeaderView("Keyboard shortcuts")
+                KeyboardShortcutsField(text: "Start / Pause session", shortcutName: .startPauseSession)
+                Spacer()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding()
         .defaultAppStorage(.standard)
@@ -37,6 +38,7 @@ struct GeneralSettingsView_Preview: PreviewProvider {
                 GeneralSettingsView(modelData: $modelData)
             }
             .padding()
+            .frame(width: 300, height: 500)
         }
     }
     

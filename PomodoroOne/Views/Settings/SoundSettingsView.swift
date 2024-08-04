@@ -13,8 +13,7 @@ struct SoundSettingsView: View {
     var body: some View {
         Form {
             VStack{
-                Section {
-                    Picker("Work completed sound", selection: $modelData.soundWorkEnd) {
+                    SettingsPickerView("Work completed sound", selection: $modelData.soundWorkEnd) {
                         ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
                             Text(key)
                                 .tag(value)
@@ -23,7 +22,7 @@ struct SoundSettingsView: View {
                     .onChange(of: modelData.soundWorkEnd) {
                         modelData.soundAction = "playWorkEnd"
                     }
-                    Picker("Rest completed sound", selection: $modelData.soundRestEnd) {
+                    SettingsPickerView("Rest completed sound", selection: $modelData.soundRestEnd) {
                         ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
                             Text(key)
                                 .tag(value)
@@ -32,7 +31,6 @@ struct SoundSettingsView: View {
                     .onChange(of: modelData.soundRestEnd) {
                         modelData.soundAction = "playRestEnd"
                     }
-                }
             }
         }
         .padding()

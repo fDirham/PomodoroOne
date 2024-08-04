@@ -13,18 +13,13 @@ struct IntervalsSettingsView: View {
     var body: some View {
         Form {
             VStack{
-                Spacer()
-                Section(header: Text("Durations")){
-                    TimeTextField(title: "Work duration", timeS: $modelData.workSessionDurationS)
-                    TimeTextField(title: "Rest duration", timeS: $modelData.restSessionDurationS)
-                    TimeTextField(title: "Long rest duration", timeS: $modelData.longRestSessionDurationS)
-                }
-                Spacer()
-                Section(header: Text("Frequencies")){
-                    TextField("Target work sessions per day", value: $modelData.targetWorkSessions, format: .number)
-                    TextField("Long rest every _ rest sessions", value: $modelData.whenToLongRest, format: .number)
-                        .textFieldStyle(.roundedBorder)
-                }
+                SettingsSectionHeaderView("Durations", isFirst: true)
+                TimeTextField(title: "Work duration", timeS: $modelData.workSessionDurationS)
+                TimeTextField(title: "Rest duration", timeS: $modelData.restSessionDurationS)
+                TimeTextField(title: "Long rest duration", timeS: $modelData.longRestSessionDurationS)
+                SettingsSectionHeaderView("Session targets")
+                SettingsTextFieldView("Target work sessions per day", value: $modelData.targetWorkSessions)
+                SettingsTextFieldView("Long rest every _ rest sessions", value: $modelData.whenToLongRest)
                 Spacer()
             }
         }
