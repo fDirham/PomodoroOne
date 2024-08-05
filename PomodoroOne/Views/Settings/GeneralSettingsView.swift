@@ -27,6 +27,9 @@ struct GeneralSettingsView: View {
         }
         .padding()
         .defaultAppStorage(.standard)
+        .onDisappear{
+            print("bye")
+        }
     }
 }
 

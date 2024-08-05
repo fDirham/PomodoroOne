@@ -71,7 +71,24 @@ import KeyboardShortcuts
     }
     
     // Keeping track of current day
-    var lastOpenedAt: Date = Date.now
+    var _lastOpenedAt: Date = Date.now
+    var lastOpenedAt: Date {
+        get {
+            return _lastOpenedAt
+        }
+        set {
+            let shouldHandleNewDay = Calendar.current.isDateInToday(_lastOpenedAt)
+            if shouldHandleNewDay {
+                if !isPaused {
+                    isNewDayButTimerRunning = true
+                }
+                else {
+                    handleNewDay()
+                }
+            }
+            _lastOpenedAt = newValue
+        }
+    }
     var isNewDayButTimerRunning: Bool = false
     
     // Actions for contentView
@@ -158,6 +175,10 @@ import KeyboardShortcuts
     private func completeSession(){
         self.isOvertime = false
         
+        if self.isNewDayButTimerRunning {
+            self.handleNewDay()
+        }
+        
         let completedSessionType: SessionType = self.getSessionType()
         if completedSessionType == SessionType.work {
             self.workCounter += 1
@@ -168,6 +189,10 @@ import KeyboardShortcuts
                 self.restCounter += 1
                 self.sessionIndex += 1
             }
+        }
+        
+        if self.isNewDayButTimerRunning {
+            self.isNewDayButTimerRunning = false
         }
         
         if !self.isAutoPlay {
@@ -266,5 +291,12 @@ import KeyboardShortcuts
         if isNotStarted {
             handleResetSession()
         }
+    }
+    
+    // Handle new days
+    func handleNewDay(){
+        self.workCounter = 0
+        self.restCounter = 0
+        self.sessionIndex = 0
     }
 }
