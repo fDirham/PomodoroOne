@@ -29,4 +29,5 @@ struct CircleTimerArc: Shape {
 #Preview {
     CircleTimerArc(pctDone: 87, diameter: 34)
         .stroke(.red, lineWidth: 12)
+        .rotationEffect(.degrees(-90))
 }

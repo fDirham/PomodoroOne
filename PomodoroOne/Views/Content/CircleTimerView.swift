@@ -36,6 +36,7 @@ struct CircleTimerView: View {
                 )
                 .rotationEffect(Angle(degrees: -90))
             }
+            .scaleEffect(x: -1, y: 1)
     }
 }
 

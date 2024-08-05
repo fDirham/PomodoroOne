@@ -23,6 +23,14 @@ struct ContentView: View {
         return "rest"
     }
     
+    var actionButtonImage: String {
+        if modelData.isOvertime {
+           return "play.square.fill"
+        }
+        
+        return modelData.isPaused ?  "play.fill" :"pause.fill"
+    }
+    
     var body: some View {
         VStack {
             HStack{
@@ -56,7 +64,7 @@ struct ContentView: View {
                         Button(action: {
                             modelData.handleActionButtonPress()
                         }){
-                            Image(systemName: modelData.isPaused ?  "play.fill" :"pause.fill")
+                            Image(systemName: actionButtonImage)
                                 .resizable()
                                 .frame(width: 18, height: 18)
                         }
