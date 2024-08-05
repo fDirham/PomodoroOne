@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct GeneralSettingsView: View {
-    @Binding var modelData: ModelData
+    @Environment(ModelData.self) private var modelData: ModelData
     
     var body: some View {
+        @Bindable var modelData = modelData
         Form {
             VStack{
                 SettingsSectionHeaderView("General", isFirst:true)
@@ -35,7 +36,8 @@ struct GeneralSettingsView_Preview: PreviewProvider {
 
         var body: some View {
             TabView{
-                GeneralSettingsView(modelData: $modelData)
+                GeneralSettingsView()
+                    .environment(modelData)
             }
             .padding()
             .frame(width: 300, height: 500)

@@ -8,33 +8,36 @@
 import SwiftUI
 
 struct SoundSettingsView: View {
-    @Binding var modelData: ModelData
+    @Environment(ModelData.self) private var modelData: ModelData
     
     var body: some View {
+        @Bindable var modelData = modelData
+        
         Form {
-            VStack{
-                    SettingsPickerView("Work completed sound", selection: $modelData.soundWorkEnd) {
-                        ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
-                            Text(key)
-                                .tag(value)
-                        }
+            VStack(alignment: .leading){
+                SettingsSectionHeaderView("Session completed sounds", isFirst: true)
+                SettingsPickerView("Work completed", selection: $modelData.soundWorkEnd) {
+                    ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
+                        Text(key)
+                            .tag(value)
                     }
-                    .onChange(of: modelData.soundWorkEnd) {
-                        modelData.soundAction = "playWorkEnd"
+                }
+                .onChange(of: modelData.soundWorkEnd) {
+                    modelData.soundAction = "playWorkEnd"
+                }
+                SettingsPickerView("Rest completed", selection: $modelData.soundRestEnd) {
+                    ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
+                        Text(key)
+                            .tag(value)
                     }
-                    SettingsPickerView("Rest completed sound", selection: $modelData.soundRestEnd) {
-                        ForEach(appSoundsDict.sorted(by: >), id: \.key) { key, value in
-                            Text(key)
-                                .tag(value)
-                        }
-                    }
-                    .onChange(of: modelData.soundRestEnd) {
-                        modelData.soundAction = "playRestEnd"
-                    }
+                }
+                .onChange(of: modelData.soundRestEnd) {
+                    modelData.soundAction = "playRestEnd"
+                }
+                Spacer()
             }
         }
         .padding()
-        .defaultAppStorage(.standard)
     }
 }
 
@@ -44,7 +47,8 @@ struct SoundSettingsView_Preview: PreviewProvider {
 
         var body: some View {
             TabView{
-                SoundSettingsView(modelData: $modelData)
+                SoundSettingsView()
+                    .environment(modelData)
             }
             .padding()
         }

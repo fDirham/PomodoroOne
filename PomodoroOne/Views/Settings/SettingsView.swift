@@ -13,15 +13,16 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            GeneralSettingsView(modelData: $modelData)
+            GeneralSettingsView()
                 .tabItem { Label("General", systemImage: "gear") }
-            IntervalsSettingsView(modelData: $modelData)
+            IntervalsSettingsView()
                 .tabItem { Label("Intervals", systemImage: "clock.fill") }
-            SoundSettingsView(modelData: $modelData)
+            SoundSettingsView()
                 .tabItem { Label("Sound", systemImage: "speaker.fill") }
         }
+        .environment(modelData)
         .scenePadding()
-        .frame(maxWidth: 350, minHeight: 100)
+        .frame(width: 450, height: 400)
         .fixedSize()
         .focused($isViewFocused)
     }

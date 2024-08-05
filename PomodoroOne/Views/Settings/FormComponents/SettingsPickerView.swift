@@ -21,7 +21,7 @@ struct SettingsPickerView<SelectionValue, Content>: View where SelectionValue: H
     var body: some View {
         HStack{
             Text(text)
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
             Picker(text, selection: selection) {
                 content()
             }

@@ -19,8 +19,8 @@ struct SettingsTextFieldView<V>: View {
     var body: some View {
         HStack {
             Text(labelText)
-            Spacer()
-                .frame(maxWidth: .infinity)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
             TextField(labelText, value: value, formatter: NumberFormatter())
                 .textFieldStyle(.roundedBorder)
                 .labelsHidden()
@@ -29,7 +29,17 @@ struct SettingsTextFieldView<V>: View {
     }
 }
 
-//TODO
-//#Preview {
-//    SettingsTextFieldView()
-//}
+struct SettingsTextFieldView_Preview: PreviewProvider {
+    struct Container: View {
+        @State var someVal = ""
+        
+        var body: some View {
+            SettingsTextFieldView("some label", value: $someVal)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
+}
+

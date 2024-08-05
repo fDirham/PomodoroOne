@@ -261,4 +261,10 @@ import KeyboardShortcuts
         self.timerStartS = self.workSessionDurationS
         self.timerLeftS = self.workSessionDurationS
     }
+    
+    func onSettingsDurationUpdate(){
+        if isNotStarted {
+            handleResetSession()
+        }
+    }
 }

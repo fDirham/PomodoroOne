@@ -174,7 +174,6 @@
 				8BB559312C5C0FA10070A0EF /* GeneralSettingsView.swift */,
 				8BB559482C5D9C5C0070A0EF /* SoundSettingsView.swift */,
 				8BB559332C5C0FAD0070A0EF /* IntervalsSettingsView.swift */,
-				8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -205,6 +204,7 @@
 				8BB559522C6031490070A0EF /* SettingsSectionHeaderView.swift */,
 				8BB559542C6034A00070A0EF /* SettingsPickerView.swift */,
 				8BB559562C6044380070A0EF /* SettingsTextFieldView.swift */,
+				8BB5593B2C5D58D90070A0EF /* TimeTextField.swift */,
 			);
 			path = FormComponents;
 			sourceTree = "<group>";

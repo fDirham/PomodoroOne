@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct IntervalsSettingsView: View {
-    @Binding var modelData: ModelData
+    @Environment(ModelData.self) private var modelData
     
     var body: some View {
+        @Bindable var modelData = modelData
+        
         Form {
             VStack{
-                SettingsSectionHeaderView("Durations", isFirst: true)
+                SettingsSectionHeaderView("Durations (in minutes)", isFirst: true)
                 TimeTextField(title: "Work duration", timeS: $modelData.workSessionDurationS)
                 TimeTextField(title: "Rest duration", timeS: $modelData.restSessionDurationS)
                 TimeTextField(title: "Long rest duration", timeS: $modelData.longRestSessionDurationS)
@@ -24,7 +26,6 @@ struct IntervalsSettingsView: View {
             }
         }
         .padding()
-        .defaultAppStorage(.standard)
     }
 }
 
@@ -34,7 +35,8 @@ struct IntervalsSettingsView_Preview: PreviewProvider {
         
         var body: some View {
             TabView{
-                IntervalsSettingsView(modelData: $modelData)
+                IntervalsSettingsView()
+                    .environment(modelData)
             }.padding()
         }
     }
